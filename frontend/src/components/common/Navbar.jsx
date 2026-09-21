@@ -72,6 +72,11 @@ function Navbar() {
           <Link to="/register" onClick={() => setMobileMenu(false)}>
             Inscription
           </Link>
+
+          <Link to="/admin/login" className="nav-login">
+            <LogIn size={18} />
+            Admin
+          </Link>
         </div>
       )}
     </header>
