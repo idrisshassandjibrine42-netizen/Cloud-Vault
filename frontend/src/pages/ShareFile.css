@@ -1,0 +1,423 @@
+/* ========================================
+   PAGE PRINCIPALE
+======================================== */
+
+.share-file-page {
+  min-height: 100vh;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 50px 20px;
+
+  background: #f5f7fa;
+  color: #111827;
+}
+
+/* ========================================
+   LOGO
+======================================== */
+
+.share-file-brand {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.share-file-brand h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.share-file-brand p {
+  margin: 7px 0 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* ========================================
+   CARTE
+======================================== */
+
+.share-file-card {
+  width: 100%;
+  max-width: 600px;
+
+  box-sizing: border-box;
+
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+
+  padding: 35px;
+
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+}
+
+/* ========================================
+   ICÔNE
+======================================== */
+
+.share-file-icon {
+  width: 80px;
+  height: 80px;
+
+  margin: 0 auto 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 16px;
+
+  background: #f3f4f6;
+  color: #374151;
+
+  font-size: 38px;
+}
+
+/* ========================================
+   CONTENU
+======================================== */
+
+.share-file-content {
+  text-align: center;
+}
+
+.share-file-label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: 13px;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.share-file-content h2 {
+  margin: 0 auto 25px;
+
+  max-width: 100%;
+
+  font-size: 22px;
+  font-weight: 600;
+
+  color: #111827;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ========================================
+   INFORMATIONS
+======================================== */
+
+.share-file-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 15px;
+
+  margin-bottom: 18px;
+}
+
+.share-file-details div {
+  padding: 14px;
+
+  background: #f9fafb;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 10px;
+}
+
+.share-file-details span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.share-file-details strong {
+  display: block;
+
+  font-size: 14px;
+
+  color: #111827;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ========================================
+   EXPIRATION
+======================================== */
+
+.share-file-expiration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-bottom: 22px;
+
+  padding: 12px 15px;
+
+  background: #f9fafb;
+
+  border-radius: 8px;
+
+  color: #6b7280;
+
+  font-size: 13px;
+}
+
+.share-file-expiration svg {
+  flex-shrink: 0;
+}
+
+/* ========================================
+   BOUTON TÉLÉCHARGEMENT
+======================================== */
+
+.share-file-download-button {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  padding: 13px 20px;
+
+  border: none;
+  border-radius: 9px;
+
+  background: #111827;
+  color: white;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.share-file-download-button:hover {
+  background: #1f2937;
+}
+
+.share-file-download-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* ========================================
+   SPINNER
+======================================== */
+
+.share-file-spinner {
+  animation: shareFileSpin 1s linear infinite;
+}
+
+.share-file-button-spinner {
+  animation: shareFileSpin 1s linear infinite;
+}
+
+@keyframes shareFileSpin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ========================================
+   PAGE ERREUR
+======================================== */
+
+.share-file-error {
+  text-align: center;
+}
+
+.share-file-error-icon {
+  width: 70px;
+  height: 70px;
+
+  margin: 0 auto 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #fef2f2;
+  color: #dc2626;
+
+  font-size: 34px;
+}
+
+.share-file-error h1 {
+  margin: 0 0 10px;
+
+  font-size: 24px;
+
+  color: #111827;
+}
+
+.share-file-error p {
+  margin: 0 auto 20px;
+
+  max-width: 450px;
+
+  line-height: 1.6;
+
+  color: #6b7280;
+}
+
+/* ========================================
+   MESSAGE EXPIRATION
+======================================== */
+
+.share-file-expired-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-bottom: 20px;
+
+  padding: 12px;
+
+  border-radius: 8px;
+
+  background: #fef2f2;
+  color: #dc2626;
+
+  font-size: 13px;
+}
+
+/* ========================================
+   BOUTON RETOUR
+======================================== */
+
+.share-file-back-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 11px 17px;
+
+  border-radius: 8px;
+
+  background: #111827;
+  color: white;
+
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition: 0.2s;
+}
+
+.share-file-back-button:hover {
+  background: #1f2937;
+}
+
+/* ========================================
+   LIEN ACCUEIL
+======================================== */
+
+.share-file-home-link {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  margin-top: 25px;
+
+  color: #374151;
+
+  text-decoration: none;
+
+  font-size: 14px;
+}
+
+.share-file-home-link:hover {
+  text-decoration: underline;
+}
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.share-file-footer {
+  margin-top: 15px;
+
+  color: #9ca3af;
+
+  font-size: 12px;
+
+  text-align: center;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 600px) {
+  .share-file-page {
+    padding: 30px 15px;
+  }
+
+  .share-file-brand {
+    margin-bottom: 22px;
+  }
+
+  .share-file-brand h1 {
+    font-size: 24px;
+  }
+
+  .share-file-card {
+    padding: 25px 20px;
+    border-radius: 12px;
+  }
+
+  .share-file-icon {
+    width: 65px;
+    height: 65px;
+
+    font-size: 30px;
+  }
+
+  .share-file-content h2 {
+    font-size: 18px;
+  }
+
+  .share-file-details {
+    grid-template-columns: 1fr;
+  }
+
+  .share-file-expiration {
+    align-items: flex-start;
+    text-align: left;
+  }
+}

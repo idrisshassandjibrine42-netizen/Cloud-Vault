@@ -1,0 +1,845 @@
+/* =========================================================
+   PAGE MES PARTAGES
+========================================================= */
+
+.shared-files-page {
+  width: 100%;
+  min-height: 100vh;
+
+  padding: 30px 40px 60px;
+
+  box-sizing: border-box;
+
+  background: #f8fafc;
+
+  color: #172554;
+
+  font-family: Inter, Arial, Helvetica, sans-serif;
+}
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.shared-topbar {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  margin-bottom: 30px;
+}
+
+/* =========================================================
+   RETOUR DASHBOARD
+========================================================= */
+
+.shared-back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  min-height: 42px;
+
+  padding: 0 15px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  color: #334155;
+
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition: 0.2s ease;
+}
+
+.shared-back-button:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+
+  transform: translateX(-2px);
+}
+
+.shared-back-button svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* =========================================================
+   TITRE
+========================================================= */
+
+.shared-title-section {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  margin-bottom: 28px;
+}
+
+.shared-title-icon {
+  width: 50px;
+  height: 50px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+
+  background: #eff6ff;
+
+  color: #2563eb;
+
+  border: 1px solid #dbeafe;
+}
+
+.shared-title-icon svg {
+  width: 25px;
+  height: 25px;
+}
+
+.shared-title-section h1 {
+  margin: 0;
+
+  color: #0f172a;
+
+  font-size: 29px;
+  font-weight: 700;
+}
+
+.shared-title-section p {
+  margin: 6px 0 0;
+
+  color: #64748b;
+
+  font-size: 14px;
+}
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.shared-files-message {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  min-height: 48px;
+
+  margin-bottom: 20px;
+  padding: 0 18px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #a7f3d0;
+  border-radius: 10px;
+
+  background: #ecfdf5;
+
+  color: #047857;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  animation: messageAppear 0.25s ease;
+}
+
+@keyframes messageAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   LISTE
+========================================================= */
+
+.shared-files-list {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+/* =========================================================
+   CARTE PARTAGE
+========================================================= */
+
+.shared-file-card {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 25px;
+
+  padding: 20px 22px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 14px;
+
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.shared-file-card:hover {
+  transform: translateY(-2px);
+
+  border-color: #bfdbfe;
+
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+}
+
+/* =========================================================
+   PARTIE FICHIER
+========================================================= */
+
+.shared-file-main {
+  min-width: 0;
+
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+}
+
+/* =========================================================
+   ICÔNE
+========================================================= */
+
+.shared-file-icon {
+  width: 58px;
+  height: 58px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+
+  background: #eff6ff;
+
+  color: #2563eb;
+
+  border: 1px solid #dbeafe;
+}
+
+.shared-file-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* =========================================================
+   INFORMATIONS
+========================================================= */
+
+.shared-file-info {
+  min-width: 0;
+
+  flex: 1;
+}
+
+.shared-file-info h3 {
+  margin: 0 0 7px;
+
+  color: #0f172a;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shared-file-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+.meta-separator {
+  color: #94a3b8;
+}
+
+/* =========================================================
+   EXPIRATION
+========================================================= */
+
+.shared-file-expiration {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  margin-top: 7px;
+
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+.shared-file-expiration svg {
+  width: 14px;
+  height: 14px;
+}
+
+.shared-file-expiration.expired {
+  color: #dc2626;
+
+  font-weight: 600;
+}
+
+/* =========================================================
+   PARTAGE EXPIRÉ
+========================================================= */
+
+.shared-file-card.shared-file-expired {
+  border-color: #fecaca;
+}
+
+.shared-file-card.shared-file-expired .shared-file-icon {
+  color: #dc2626;
+
+  background: #fef2f2;
+
+  border-color: #fecaca;
+}
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.shared-file-actions {
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+}
+
+.shared-file-actions button {
+  min-height: 40px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 0 14px;
+
+  border-radius: 8px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.shared-file-actions button svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* =========================================================
+   COPIER
+========================================================= */
+
+.copy-share-button {
+  border: 1px solid #2563eb;
+
+  background: #2563eb;
+
+  color: #ffffff;
+}
+
+.copy-share-button:hover {
+  background: #1d4ed8;
+
+  border-color: #1d4ed8;
+
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   SUPPRIMER
+========================================================= */
+
+.shared-delete-button {
+  border: 1px solid #fecaca;
+
+  background: #ffffff;
+
+  color: #dc2626;
+}
+
+.shared-delete-button:hover {
+  background: #fef2f2;
+
+  border-color: #fca5a5;
+
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   ÉTAT VIDE
+========================================================= */
+
+.shared-files-empty {
+  width: 100%;
+
+  min-height: 300px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px 20px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border: 1px dashed #cbd5e1;
+
+  border-radius: 14px;
+
+  text-align: center;
+
+  color: #64748b;
+}
+
+.shared-files-empty > svg {
+  margin-bottom: 14px;
+
+  color: #2563eb;
+}
+
+.empty-share-icon {
+  width: 62px;
+  height: 62px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 15px;
+
+  border-radius: 50%;
+
+  background: #eff6ff;
+
+  color: #2563eb;
+}
+
+.empty-share-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.shared-files-empty h2 {
+  margin: 0 0 8px;
+
+  color: #0f172a;
+
+  font-size: 19px;
+}
+
+.shared-files-empty p {
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 14px;
+}
+
+/* =========================================================
+   TABLETTE
+========================================================= */
+
+@media (max-width: 900px) {
+  .shared-files-page {
+    padding: 25px 25px 50px;
+  }
+
+  .shared-file-card {
+    gap: 15px;
+
+    padding: 18px;
+  }
+
+  .shared-file-actions {
+    gap: 7px;
+  }
+
+  .shared-file-actions button {
+    width: 40px;
+
+    padding: 0;
+  }
+
+  .shared-file-actions button span {
+    display: none;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  .shared-files-page {
+    padding: 16px 12px 40px;
+  }
+
+  /* -----------------------------------------
+     RETOUR DASHBOARD
+  ----------------------------------------- */
+
+  .shared-topbar {
+    margin-bottom: 18px;
+  }
+
+  .shared-back-button {
+    width: 40px;
+    height: 40px;
+
+    min-height: 40px;
+
+    justify-content: center;
+
+    padding: 0;
+
+    border-radius: 9px;
+  }
+
+  .shared-back-button span {
+    display: none;
+  }
+
+  .shared-back-button svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  /* -----------------------------------------
+     ZONE MES PARTAGES
+  ----------------------------------------- */
+
+  .shared-title-section {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+
+    padding: 0 2px;
+  }
+
+  .shared-title-icon {
+    width: 43px;
+    height: 43px;
+
+    border-radius: 11px;
+  }
+
+  .shared-title-icon svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .shared-title-section h1 {
+    font-size: 22px;
+  }
+
+  .shared-title-section p {
+    margin-top: 3px;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+  }
+
+  /* -----------------------------------------
+     MESSAGE
+  ----------------------------------------- */
+
+  .shared-files-message {
+    min-height: 44px;
+
+    margin-bottom: 15px;
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+  }
+
+  /* -----------------------------------------
+     LISTE
+  ----------------------------------------- */
+
+  .shared-files-list {
+    gap: 10px;
+  }
+
+  /* -----------------------------------------
+     CARTE MOBILE
+  ----------------------------------------- */
+
+  .shared-file-card {
+    width: 100%;
+
+    display: block;
+
+    padding: 14px;
+
+    border-radius: 12px;
+  }
+
+  /* -----------------------------------------
+     PARTIE FICHIER
+  ----------------------------------------- */
+
+  .shared-file-main {
+    width: 100%;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 11px;
+  }
+
+  /* -----------------------------------------
+     ICÔNE
+  ----------------------------------------- */
+
+  .shared-file-icon {
+    width: 47px;
+    height: 47px;
+
+    border-radius: 10px;
+  }
+
+  .shared-file-icon svg {
+    width: 23px;
+    height: 23px;
+  }
+
+  /* -----------------------------------------
+     INFORMATIONS
+  ----------------------------------------- */
+
+  .shared-file-info {
+    width: calc(100% - 58px);
+
+    min-width: 0;
+  }
+
+  .shared-file-info h3 {
+    margin: 2px 0 6px;
+
+    font-size: 14px;
+
+    line-height: 1.35;
+  }
+
+  .shared-file-meta {
+    gap: 5px;
+
+    font-size: 10px;
+
+    line-height: 1.4;
+  }
+
+  .meta-separator {
+    display: none;
+  }
+
+  /* -----------------------------------------
+     EXPIRATION
+  ----------------------------------------- */
+
+  .shared-file-expiration {
+    margin-top: 6px;
+
+    gap: 5px;
+
+    font-size: 10px;
+
+    line-height: 1.4;
+  }
+
+  .shared-file-expiration svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* -----------------------------------------
+     ACTIONS MOBILE
+  ----------------------------------------- */
+
+  .shared-file-actions {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 8px;
+
+    margin-top: 13px;
+
+    padding-top: 12px;
+
+    border-top: 1px solid #f1f5f9;
+  }
+
+  .shared-file-actions button {
+    width: 100%;
+
+    min-height: 38px;
+
+    padding: 0 8px;
+
+    gap: 6px;
+
+    border-radius: 7px;
+
+    font-size: 11px;
+  }
+
+  .shared-file-actions button span {
+    display: inline;
+  }
+
+  .shared-file-actions button svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* -----------------------------------------
+     EMPTY
+  ----------------------------------------- */
+
+  .shared-files-empty {
+    min-height: 250px;
+
+    padding: 30px 18px;
+
+    border-radius: 12px;
+  }
+
+  .empty-share-icon {
+    width: 55px;
+    height: 55px;
+  }
+
+  .shared-files-empty h2 {
+    font-size: 17px;
+  }
+
+  .shared-files-empty p {
+    font-size: 12px;
+
+    line-height: 1.5;
+  }
+}
+
+/* =========================================================
+   PETIT TÉLÉPHONE
+========================================================= */
+
+@media (max-width: 380px) {
+  .shared-files-page {
+    padding: 14px 10px 35px;
+  }
+
+  .shared-title-section h1 {
+    font-size: 20px;
+  }
+
+  .shared-title-section p {
+    font-size: 11px;
+  }
+
+  .shared-title-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .shared-file-card {
+    padding: 12px;
+  }
+
+  .shared-file-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .shared-file-info {
+    width: calc(100% - 55px);
+  }
+
+  .shared-file-info h3 {
+    font-size: 13px;
+  }
+
+  .shared-file-meta,
+  .shared-file-expiration {
+    font-size: 9px;
+  }
+
+  .shared-file-actions button {
+    min-height: 36px;
+
+    font-size: 10px;
+  }
+}

@@ -1,0 +1,682 @@
+/* ======================================================
+   TRASH PAGE
+====================================================== */
+
+.trash-page {
+  min-height: 100vh;
+  padding: 30px 20px 50px;
+  background: #f8fafc;
+}
+
+.trash-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ======================================================
+   HEADER
+====================================================== */
+
+.trash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.trash-header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.trash-header h1 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  margin: 0 0 5px;
+
+  color: #111827;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.trash-header h1 svg {
+  color: #dc2626;
+}
+
+.trash-header p {
+  margin: 0;
+
+  color: #6b7280;
+
+  font-size: 14px;
+}
+
+.trash-back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 10px 13px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+
+  background: white;
+  color: #111827;
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  transition: 0.2s;
+}
+
+.trash-back-button:hover {
+  background: #f3f4f6;
+}
+
+/* ======================================================
+   VIDER CORBEILLE
+====================================================== */
+
+.trash-empty-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 11px 16px;
+
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+
+  background: white;
+  color: #dc2626;
+
+  cursor: pointer;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  transition: 0.2s;
+}
+
+.trash-empty-button:hover {
+  background: #fef2f2;
+}
+
+/* ======================================================
+   MESSAGE
+====================================================== */
+
+.trash-message {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  margin-bottom: 20px;
+  padding: 13px 16px;
+
+  border: 1px solid #bbf7d0;
+  border-radius: 9px;
+
+  background: #f0fdf4;
+  color: #166534;
+
+  font-size: 14px;
+}
+
+.trash-message button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+
+  border: none;
+  background: transparent;
+
+  color: inherit;
+
+  cursor: pointer;
+}
+
+/* ======================================================
+   INFO
+====================================================== */
+
+.trash-info {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  width: fit-content;
+
+  margin-bottom: 20px;
+  padding: 12px 16px;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 9px;
+
+  background: white;
+}
+
+.trash-info-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 8px;
+
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.trash-info strong {
+  display: block;
+
+  color: #111827;
+
+  font-size: 14px;
+}
+
+.trash-info span {
+  display: block;
+
+  margin-top: 2px;
+
+  color: #6b7280;
+
+  font-size: 12px;
+}
+
+/* ======================================================
+   TABLE
+====================================================== */
+
+.trash-table-wrapper {
+  width: 100%;
+
+  overflow-x: auto;
+
+  background: white;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.trash-table {
+  width: 100%;
+  min-width: 750px;
+
+  border-collapse: collapse;
+
+  text-align: left;
+}
+
+.trash-table thead {
+  background: #f9fafb;
+}
+
+.trash-table th {
+  padding: 15px 16px;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  color: #6b7280;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  white-space: nowrap;
+}
+
+.trash-table td {
+  padding: 14px 16px;
+
+  border-bottom: 1px solid #f1f5f9;
+
+  color: #374151;
+
+  font-size: 14px;
+
+  vertical-align: middle;
+}
+
+.trash-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.trash-table tbody tr:hover {
+  background: #fafafa;
+}
+
+/* ======================================================
+   FICHIER
+====================================================== */
+
+.trash-file {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  min-width: 230px;
+}
+
+.trash-file-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  border-radius: 9px;
+
+  background: #f3f4f6;
+
+  color: #6b7280;
+
+  font-size: 20px;
+}
+
+.trash-file-icon.images {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.trash-file-icon.videos {
+  background: #faf5ff;
+  color: #9333ea;
+}
+
+.trash-file-icon.audio {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.trash-file-icon.documents {
+  background: #fff7ed;
+  color: #ea580c;
+}
+
+.trash-file-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  min-width: 0;
+}
+
+.trash-file-info span {
+  display: block;
+
+  max-width: 330px;
+
+  overflow: hidden;
+
+  color: #111827;
+
+  font-weight: 600;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.trash-file-info small {
+  max-width: 300px;
+
+  overflow: hidden;
+
+  color: #9ca3af;
+
+  font-size: 11px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ======================================================
+   TYPE
+====================================================== */
+
+.trash-type {
+  display: inline-flex;
+
+  padding: 5px 9px;
+
+  border-radius: 6px;
+
+  background: #f3f4f6;
+  color: #4b5563;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* ======================================================
+   TAILLE / DATE
+====================================================== */
+
+.trash-size,
+.trash-date {
+  color: #6b7280;
+
+  font-size: 13px;
+
+  white-space: nowrap;
+}
+
+/* ======================================================
+   ACTIONS
+====================================================== */
+
+.trash-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.trash-restore-button,
+.trash-menu-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 35px;
+  height: 35px;
+
+  border-radius: 7px;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.trash-restore-button {
+  border: 1px solid #bbf7d0;
+
+  background: #f0fdf4;
+
+  color: #16a34a;
+}
+
+.trash-restore-button:hover {
+  background: #dcfce7;
+}
+
+.trash-menu-container {
+  position: relative;
+}
+
+.trash-menu-button {
+  border: none;
+
+  background: transparent;
+
+  color: #6b7280;
+}
+
+.trash-menu-button:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+/* ======================================================
+   MENU
+====================================================== */
+
+.trash-action-menu {
+  position: absolute;
+
+  top: 40px;
+  right: 0;
+
+  z-index: 50;
+
+  width: 210px;
+
+  padding: 6px;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 9px;
+
+  background: white;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.trash-action-menu button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  width: 100%;
+
+  padding: 10px;
+
+  border: none;
+  border-radius: 6px;
+
+  background: transparent;
+
+  color: #374151;
+
+  cursor: pointer;
+
+  text-align: left;
+
+  font-size: 13px;
+}
+
+.trash-action-menu button:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.trash-action-menu button svg {
+  flex-shrink: 0;
+
+  font-size: 15px;
+}
+
+.trash-action-menu .delete-action {
+  color: #dc2626;
+}
+
+.trash-action-menu .delete-action:hover {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+/* ======================================================
+   LOADING
+====================================================== */
+
+.trash-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 300px;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+
+  background: white;
+
+  color: #6b7280;
+}
+
+.trash-spinner {
+  width: 35px;
+  height: 35px;
+
+  margin-bottom: 15px;
+
+  border: 3px solid #e5e7eb;
+  border-top-color: #111827;
+
+  border-radius: 50%;
+
+  animation: trash-spin 0.8s linear infinite;
+}
+
+@keyframes trash-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.trash-loading p {
+  margin: 0;
+
+  font-size: 14px;
+}
+
+/* ======================================================
+   CORBEILLE VIDE
+====================================================== */
+
+.trash-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 350px;
+
+  padding: 30px;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+
+  background: white;
+
+  text-align: center;
+}
+
+.trash-empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 70px;
+  height: 70px;
+
+  margin-bottom: 18px;
+
+  border-radius: 50%;
+
+  background: #f3f4f6;
+
+  color: #9ca3af;
+
+  font-size: 30px;
+}
+
+.trash-empty h2 {
+  margin: 0 0 8px;
+
+  color: #111827;
+
+  font-size: 20px;
+}
+
+.trash-empty p {
+  margin: 0 0 20px;
+
+  color: #6b7280;
+
+  font-size: 14px;
+}
+
+.trash-files-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 16px;
+
+  border-radius: 8px;
+
+  background: #111827;
+  color: white;
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  transition: 0.2s;
+}
+
+.trash-files-link:hover {
+  background: #374151;
+}
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+
+@media (max-width: 800px) {
+  .trash-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .trash-header-left {
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .trash-empty-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .trash-page {
+    padding: 20px 12px 40px;
+  }
+
+  .trash-header-left {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .trash-header h1 {
+    font-size: 24px;
+  }
+
+  .trash-header p {
+    font-size: 13px;
+  }
+
+  .trash-info {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .trash-table-wrapper {
+    border-radius: 9px;
+  }
+}

@@ -1,0 +1,1195 @@
+/* =========================================
+   PAGE
+========================================= */
+
+.admin-messages-page {
+  min-height: 100vh;
+  background: #f5f6f8;
+  color: #172033;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.admin-messages-header {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 22px 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.admin-messages-header-left {
+  display: flex;
+  align-items: center;
+}
+
+.admin-messages-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.admin-messages-title-icon {
+  width: 46px;
+  height: 46px;
+
+  border-radius: 12px;
+
+  background: #111827;
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 21px;
+}
+
+.admin-messages-title h1 {
+  margin: 0;
+
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.admin-messages-title p {
+  margin: 4px 0 0;
+
+  color: #6b7280;
+
+  font-size: 13px;
+}
+
+/* =========================================
+   COMPTEUR
+========================================= */
+
+.admin-messages-counter {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  background: #f3f4f6;
+
+  padding: 10px 15px;
+
+  border-radius: 10px;
+
+  color: #374151;
+}
+
+.admin-messages-counter span {
+  font-weight: 700;
+}
+
+.admin-messages-counter small {
+  color: #6b7280;
+}
+
+/* =========================================
+   CONTENU
+========================================= */
+
+.admin-messages-container {
+  width: 100%;
+  max-width: 1250px;
+
+  margin: 0 auto;
+
+  padding: 32px;
+}
+
+/* =========================================
+   TOOLBAR
+========================================= */
+
+.admin-messages-toolbar {
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+
+  margin-bottom: 20px;
+}
+
+.admin-messages-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  min-width: max-content;
+
+  color: #4b5563;
+
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.admin-messages-back:hover {
+  color: #111827;
+}
+
+/* =========================================
+   RECHERCHE
+========================================= */
+
+.admin-messages-search {
+  flex: 1;
+
+  max-width: 500px;
+
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 10px;
+
+  padding: 0 14px;
+}
+
+.admin-messages-search svg {
+  color: #9ca3af;
+
+  flex-shrink: 0;
+}
+
+.admin-messages-search input {
+  width: 100%;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  font-size: 14px;
+}
+
+.admin-messages-total {
+  margin-left: auto;
+
+  color: #6b7280;
+
+  font-size: 14px;
+
+  white-space: nowrap;
+}
+
+/* =========================================
+   ERREUR
+========================================= */
+
+.admin-messages-error {
+  margin-bottom: 20px;
+
+  padding: 13px 15px;
+
+  border-radius: 9px;
+
+  background: #fef2f2;
+
+  color: #b91c1c;
+
+  font-size: 14px;
+}
+
+/* =========================================
+   LOADING
+========================================= */
+
+.admin-messages-loading {
+  min-height: 250px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 14px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  color: #6b7280;
+}
+
+.admin-messages-loading svg {
+  font-size: 30px;
+}
+
+/* =========================================
+   EMPTY
+========================================= */
+
+.admin-messages-empty {
+  min-height: 300px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 14px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 30px;
+}
+
+.admin-messages-empty svg {
+  font-size: 42px;
+
+  color: #9ca3af;
+
+  margin-bottom: 12px;
+}
+
+.admin-messages-empty h2 {
+  margin: 0 0 6px;
+
+  color: #111827;
+
+  font-size: 20px;
+}
+
+.admin-messages-empty p {
+  margin: 0;
+
+  color: #6b7280;
+
+  font-size: 14px;
+}
+
+/* =========================================
+   TABLE
+========================================= */
+
+.admin-messages-table-wrapper {
+  width: 100%;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 14px;
+
+  overflow-x: auto;
+}
+
+.admin-messages-table {
+  width: 100%;
+
+  min-width: 850px;
+
+  border-collapse: collapse;
+}
+
+.admin-messages-table th {
+  padding: 15px 18px;
+
+  text-align: left;
+
+  background: #f9fafb;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  color: #6b7280;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.06em;
+}
+
+.admin-messages-table td {
+  padding: 16px 18px;
+
+  border-bottom: 1px solid #f0f1f3;
+
+  font-size: 14px;
+}
+
+.admin-messages-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-messages-table tbody tr:hover {
+  background: #fafafa;
+}
+
+.admin-messages-table tbody tr.message-unread {
+  background: #fcfcff;
+}
+
+/* =========================================
+   STATUT
+========================================= */
+
+.message-status {
+  display: inline-flex;
+
+  padding: 5px 9px;
+
+  border-radius: 20px;
+
+  font-size: 11px;
+
+  font-weight: 700;
+}
+
+.message-status.unread {
+  background: #eef2ff;
+
+  color: #4338ca;
+}
+
+.message-status.read {
+  background: #f3f4f6;
+
+  color: #6b7280;
+}
+
+/* =========================================
+   EXPÉDITEUR
+========================================= */
+
+.message-sender {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+}
+
+.message-avatar {
+  width: 36px;
+  height: 36px;
+
+  min-width: 36px;
+
+  border-radius: 50%;
+
+  background: #f3f4f6;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #6b7280;
+}
+
+.message-sender strong {
+  display: block;
+
+  color: #111827;
+}
+
+.message-sender span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #9ca3af;
+
+  font-size: 12px;
+}
+
+/* =========================================
+   SUJET
+========================================= */
+
+.message-subject-button {
+  border: none;
+
+  background: transparent;
+
+  padding: 0;
+
+  cursor: pointer;
+
+  color: #111827;
+
+  font-weight: 600;
+
+  text-align: left;
+}
+
+.message-subject-button:hover {
+  color: #374151;
+
+  text-decoration: underline;
+}
+
+.message-date {
+  color: #6b7280;
+
+  white-space: nowrap;
+}
+
+/* =========================================
+   ACTIONS TABLE
+========================================= */
+
+.message-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+}
+
+.message-action {
+  width: 34px;
+  height: 34px;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  font-size: 16px;
+}
+
+.message-action:disabled {
+  opacity: 0.35;
+
+  cursor: default;
+}
+
+.read-action {
+  color: #16a34a;
+}
+
+.delete-action {
+  color: #dc2626;
+}
+
+.message-action:not(:disabled):hover {
+  background: #f9fafb;
+}
+
+/* =========================================
+   MODAL OVERLAY
+========================================= */
+
+.admin-message-modal-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 1000;
+
+  padding: 20px;
+
+  background: rgba(15, 23, 42, 0.58);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =========================================
+   MODAL
+========================================= */
+
+.admin-message-modal {
+  width: 100%;
+
+  max-width: 700px;
+
+  max-height: 92vh;
+
+  overflow-y: auto;
+
+  background: #ffffff;
+
+  border-radius: 16px;
+
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================================
+   MODAL HEADER
+========================================= */
+
+.admin-message-modal-header {
+  padding: 22px;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  display: flex;
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.admin-message-modal-label {
+  display: block;
+
+  color: #6b7280;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.08em;
+}
+
+.admin-message-modal-header h2 {
+  margin: 6px 0 0;
+
+  color: #111827;
+
+  font-size: 21px;
+
+  line-height: 1.35;
+}
+
+.admin-message-close {
+  width: 36px;
+  height: 36px;
+
+  flex-shrink: 0;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #f3f4f6;
+
+  color: #374151;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  font-size: 18px;
+}
+
+.admin-message-close:hover {
+  background: #e5e7eb;
+}
+
+/* =========================================
+   INFOS MESSAGE
+========================================= */
+
+.admin-message-modal-info {
+  padding: 17px 22px;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.admin-message-modal-info > div {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  color: #6b7280;
+}
+
+.admin-message-modal-info svg {
+  flex-shrink: 0;
+}
+
+.admin-message-modal-info strong {
+  display: block;
+
+  color: #111827;
+
+  font-size: 14px;
+}
+
+.admin-message-modal-info span {
+  display: block;
+
+  margin-top: 2px;
+
+  color: #6b7280;
+
+  font-size: 12px;
+}
+
+/* =========================================
+   CONVERSATION
+========================================= */
+
+.admin-conversation {
+  padding: 25px 22px;
+
+  background: #f8fafc;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+/* =========================================
+   MESSAGE CONVERSATION
+========================================= */
+
+.conversation-message {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 10px;
+
+  max-width: 86%;
+}
+
+.user-message {
+  align-self: flex-start;
+}
+
+.admin-message {
+  align-self: flex-end;
+
+  flex-direction: row-reverse;
+}
+
+/* =========================================
+   AVATAR
+========================================= */
+
+.conversation-avatar {
+  width: 38px;
+  height: 38px;
+
+  min-width: 38px;
+
+  border-radius: 50%;
+
+  background: #e5e7eb;
+
+  color: #4b5563;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-avatar {
+  background: #111827;
+
+  color: #ffffff;
+}
+
+/* =========================================
+   BULLE
+========================================= */
+
+.conversation-bubble {
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 13px;
+
+  padding: 13px 15px;
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.admin-message .conversation-bubble {
+  background: #111827;
+
+  color: #ffffff;
+
+  border-color: #111827;
+}
+
+/* =========================================
+   HEADER BULLE
+========================================= */
+
+.conversation-bubble-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 8px;
+}
+
+.conversation-bubble-header strong {
+  font-size: 13px;
+}
+
+.conversation-bubble-header span {
+  color: #9ca3af;
+
+  font-size: 11px;
+
+  white-space: nowrap;
+}
+
+.admin-message .conversation-bubble-header span {
+  color: #d1d5db;
+}
+
+/* =========================================
+   SUJET DANS MESSAGE
+========================================= */
+
+.conversation-bubble h3 {
+  margin: 0 0 7px;
+
+  color: #111827;
+
+  font-size: 14px;
+}
+
+.admin-message .conversation-bubble h3 {
+  color: #ffffff;
+}
+
+/* =========================================
+   TEXTE MESSAGE
+========================================= */
+
+.conversation-bubble p {
+  margin: 0;
+
+  font-size: 14px;
+
+  line-height: 1.65;
+
+  white-space: pre-wrap;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================
+   ZONE RÉPONSE
+========================================= */
+
+.admin-message-reply-section {
+  padding: 20px 22px;
+
+  border-top: 1px solid #e5e7eb;
+
+  background: #ffffff;
+}
+
+.admin-message-reply-section h3 {
+  margin: 0 0 12px;
+
+  color: #111827;
+
+  font-size: 15px;
+}
+
+.admin-message-reply-section textarea {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  min-height: 110px;
+
+  resize: vertical;
+
+  border: 1px solid #d1d5db;
+
+  border-radius: 10px;
+
+  padding: 13px;
+
+  background: #ffffff;
+
+  color: #111827;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+  outline: none;
+}
+
+.admin-message-reply-section textarea:focus {
+  border-color: #111827;
+
+  box-shadow: 0 0 0 2px rgba(17, 24, 39, 0.08);
+}
+
+/* =========================================
+   BOUTON RÉPONSE
+========================================= */
+
+.admin-message-send-reply {
+  margin-top: 10px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  padding: 11px 17px;
+
+  background: #111827;
+
+  color: #ffffff;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+.admin-message-send-reply:hover {
+  background: #1f2937;
+}
+
+.admin-message-send-reply:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+}
+
+/* =========================================
+   SPINNER
+========================================= */
+
+.reply-spinner {
+  width: 14px;
+  height: 14px;
+
+  border: 2px solid rgba(255, 255, 255, 0.35);
+
+  border-top-color: #ffffff;
+
+  border-radius: 50%;
+
+  animation: replySpin 0.7s linear infinite;
+}
+
+@keyframes replySpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================
+   ACTIONS MODAL
+========================================= */
+
+.admin-message-modal-actions {
+  padding: 16px 22px;
+
+  border-top: 1px solid #e5e7eb;
+
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 10px;
+}
+
+.admin-message-read-button,
+.admin-message-delete-button {
+  border: none;
+
+  border-radius: 9px;
+
+  padding: 10px 14px;
+
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  cursor: pointer;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+.admin-message-read-button {
+  background: #111827;
+
+  color: #ffffff;
+}
+
+.admin-message-read-button:hover {
+  background: #1f2937;
+}
+
+.admin-message-delete-button {
+  background: #fee2e2;
+
+  color: #b91c1c;
+}
+
+.admin-message-delete-button:hover {
+  background: #fecaca;
+}
+
+/* =========================================
+   RESPONSIVE TABLETTE
+========================================= */
+
+@media (max-width: 800px) {
+  .admin-messages-header {
+    padding: 18px 20px;
+
+    align-items: flex-start;
+  }
+
+  .admin-messages-container {
+    padding: 22px 18px;
+  }
+
+  .admin-messages-toolbar {
+    flex-wrap: wrap;
+  }
+
+  .admin-messages-search {
+    order: 3;
+
+    flex-basis: 100%;
+
+    max-width: none;
+  }
+
+  .admin-messages-total {
+    margin-left: auto;
+  }
+
+  .conversation-message {
+    max-width: 92%;
+  }
+}
+
+/* =========================================
+   RESPONSIVE MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+  .admin-messages-header {
+    flex-direction: column;
+
+    gap: 15px;
+  }
+
+  .admin-messages-counter {
+    align-self: flex-end;
+  }
+
+  .admin-messages-title h1 {
+    font-size: 21px;
+  }
+
+  .admin-messages-title p {
+    font-size: 12px;
+  }
+
+  .admin-messages-container {
+    padding: 18px 12px;
+  }
+
+  .admin-messages-toolbar {
+    gap: 12px;
+  }
+
+  .admin-messages-back {
+    width: 100%;
+  }
+
+  .admin-messages-total {
+    width: 100%;
+
+    text-align: right;
+  }
+
+  .admin-message-modal-overlay {
+    padding: 8px;
+  }
+
+  .admin-message-modal {
+    max-height: 96vh;
+
+    border-radius: 13px;
+  }
+
+  .admin-message-modal-header {
+    padding: 17px;
+  }
+
+  .admin-message-modal-header h2 {
+    font-size: 18px;
+  }
+
+  .admin-message-modal-info {
+    padding: 15px 17px;
+
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .admin-conversation {
+    padding: 18px 12px;
+
+    gap: 15px;
+  }
+
+  .conversation-message {
+    max-width: 96%;
+  }
+
+  .conversation-avatar {
+    width: 32px;
+    height: 32px;
+
+    min-width: 32px;
+
+    font-size: 14px;
+  }
+
+  .conversation-bubble {
+    padding: 11px 12px;
+  }
+
+  .conversation-bubble-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 3px;
+  }
+
+  .admin-message .conversation-bubble-header {
+    align-items: flex-end;
+  }
+
+  .admin-message-reply-section {
+    padding: 17px;
+  }
+
+  .admin-message-modal-actions {
+    padding: 14px 17px;
+
+    flex-direction: column;
+  }
+
+  .admin-message-read-button,
+  .admin-message-delete-button {
+    width: 100%;
+  }
+}
+.admin-reply-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.admin-reply-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #4b5563;
+  cursor: pointer;
+  font-size: 12px;
+  transition: 0.2s;
+}
+
+.admin-reply-actions button:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.admin-reply-actions .admin-reply-delete {
+  color: #dc2626;
+  border-color: #fecaca;
+}
+
+.admin-reply-actions .admin-reply-delete:hover {
+  background: #fef2f2;
+  border-color: #fca5a5;
+}
+
+.admin-reply-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-messages-success {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+}
