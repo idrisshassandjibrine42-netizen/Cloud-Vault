@@ -25,6 +25,7 @@ const formatSize = (bytes) => {
   if (!bytes) return "0 B";
 
   const units = ["B", "KB", "MB", "GB"];
+
   const index = Math.min(
     Math.floor(Math.log(bytes) / Math.log(1024)),
     units.length - 1,
@@ -376,7 +377,6 @@ export default function Favorites() {
 
     if (!name) {
       showMessage("Le nom du fichier est obligatoire.");
-
       return;
     }
 
@@ -451,9 +451,6 @@ export default function Favorites() {
         throw error;
       }
 
-      // Retirer seulement de la liste des favoris.
-      // IMPORTANT :
-      // On NE supprime PAS le fichier du Storage.
       setFiles((current) => current.filter((item) => item.id !== file.id));
 
       showMessage("Fichier déplacé vers la corbeille.");
@@ -493,12 +490,13 @@ export default function Favorites() {
   return (
     <div className="favorites-page" onClick={() => setOpenMenu(null)}>
       <div className="favorites-container">
-        {/* ==========================================
+        {/* ==================================================
             HEADER
-        ========================================== */}
+        ================================================== */}
 
         <div className="favorites-header">
           <div>
+            {/* RETOUR DASHBOARD */}
             <div className="shared-files-header">
               <Link
                 to="/dashboard"
@@ -510,6 +508,7 @@ export default function Favorites() {
               </Link>
             </div>
 
+            {/* TITRE */}
             <div className="favorites-title-row">
               <div className="favorites-title-icon">
                 <FiStar />
@@ -527,9 +526,9 @@ export default function Favorites() {
           </div>
         </div>
 
-        {/* ==========================================
+        {/* ==================================================
             MESSAGE
-        ========================================== */}
+        ================================================== */}
 
         {message && (
           <div className="favorites-message">
@@ -541,9 +540,9 @@ export default function Favorites() {
           </div>
         )}
 
-        {/* ==========================================
+        {/* ==================================================
             TOOLBAR
-        ========================================== */}
+        ================================================== */}
 
         <div className="favorites-toolbar">
           <div className="favorites-search">
@@ -563,9 +562,9 @@ export default function Favorites() {
           </div>
         </div>
 
-        {/* ==========================================
+        {/* ==================================================
             CONTENU
-        ========================================== */}
+        ================================================== */}
 
         {loading ? (
           <div className="favorites-empty">
@@ -592,176 +591,339 @@ export default function Favorites() {
             )}
           </div>
         ) : (
-          <div className="favorites-table-wrapper">
-            <table className="favorites-table">
-              <thead>
-                <tr>
-                  <th>Fichier</th>
-                  <th>Dossier</th>
-                  <th>Type</th>
-                  <th>Taille</th>
-                  <th>Date</th>
-                  <th></th>
-                </tr>
-              </thead>
+          <>
+            {/* ==================================================
+                DESKTOP : TABLEAU
+            ================================================== */}
 
-              <tbody>
-                {filteredFiles.map((file) => (
-                  <tr key={file.id}>
-                    {/* FICHIER */}
-                    <td>
-                      <div className="favorites-file">
-                        <div className="favorites-file-icon">
-                          {getFileIcon(file)}
+            <div className="favorites-table-wrapper">
+              <table className="favorites-table">
+                <thead>
+                  <tr>
+                    <th>Fichier</th>
+                    <th>Dossier</th>
+                    <th>Type</th>
+                    <th>Taille</th>
+                    <th>Date</th>
+                    <th></th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {filteredFiles.map((file) => (
+                    <tr key={file.id}>
+                      {/* FICHIER */}
+                      <td>
+                        <div className="favorites-file">
+                          <div className="favorites-file-icon">
+                            {getFileIcon(file)}
+                          </div>
+
+                          <div className="favorites-file-info">
+                            <strong title={file.name}>
+                              {file.name ||
+                                file.original_name ||
+                                "Fichier sans nom"}
+                            </strong>
+
+                            {file.original_name &&
+                              file.original_name !== file.name && (
+                                <small>{file.original_name}</small>
+                              )}
+                          </div>
                         </div>
+                      </td>
 
-                        <div className="favorites-file-info">
-                          <strong title={file.name}>
-                            {file.name ||
-                              file.original_name ||
-                              "Fichier sans nom"}
-                          </strong>
+                      {/* DOSSIER */}
+                      <td>
+                        {file.folder_id ? (
+                          <Link
+                            to={`/dashboard/folders/${file.folder_id}`}
+                            className="favorites-folder-link"
+                            onClick={(event) => event.stopPropagation()}
+                          >
+                            <FiFolder />
 
-                          {file.original_name &&
-                            file.original_name !== file.name && (
-                              <small>{file.original_name}</small>
-                            )}
-                        </div>
-                      </div>
-                    </td>
+                            <span>{getFolderName(file.folder_id)}</span>
+                          </Link>
+                        ) : (
+                          <span className="favorites-folder-name">
+                            <FiFolder />
+                            Mes fichiers
+                          </span>
+                        )}
+                      </td>
 
-                    {/* DOSSIER */}
-                    <td>
-                      {file.folder_id ? (
-                        <Link
-                          to={`/dashboard/folders/${file.folder_id}`}
-                          className="favorites-folder-link"
-                          onClick={(event) => event.stopPropagation()}
-                        >
-                          <FiFolder />
-
-                          <span>{getFolderName(file.folder_id)}</span>
-                        </Link>
-                      ) : (
-                        <span className="favorites-folder-name">
-                          <FiFolder />
-                          Mes fichiers
+                      {/* TYPE */}
+                      <td>
+                        <span className="favorites-type">
+                          {getFileType(file)}
                         </span>
-                      )}
-                    </td>
+                      </td>
 
-                    {/* TYPE */}
-                    <td>
-                      <span className="favorites-type">
-                        {getFileType(file)}
-                      </span>
-                    </td>
+                      {/* TAILLE */}
+                      <td>{formatSize(file.size)}</td>
 
-                    {/* TAILLE */}
-                    <td>{formatSize(file.size)}</td>
+                      {/* DATE */}
+                      <td>{formatDate(file.created_at)}</td>
 
-                    {/* DATE */}
-                    <td>{formatDate(file.created_at)}</td>
+                      {/* ACTIONS */}
+                      <td>
+                        <div className="favorites-actions">
+                          {/* RETIRER FAVORI */}
+                          <button
+                            type="button"
+                            className="favorites-action-button favorite-active"
+                            title="Retirer des favoris"
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              handleRemoveFavorite(file);
+                            }}
+                          >
+                            <FiStar />
+                          </button>
 
-                    {/* ACTIONS */}
-                    <td>
-                      <div className="favorites-actions">
-                        {/* FAVORI */}
-                        <button
-                          type="button"
-                          className="favorites-action-button favorite-active"
-                          title="Retirer des favoris"
-                          onClick={(event) => {
-                            event.stopPropagation();
-                            handleRemoveFavorite(file);
-                          }}
-                        >
-                          <FiStar />
-                        </button>
-
-                        {/* DOWNLOAD */}
-                        <button
-                          type="button"
-                          className="favorites-action-button"
-                          title="Télécharger"
-                          onClick={(event) => {
-                            event.stopPropagation();
-                            handleDownload(file);
-                          }}
-                        >
-                          <FiDownload />
-                        </button>
-
-                        {/* MENU */}
-                        <div className="favorites-menu-container">
+                          {/* DOWNLOAD */}
                           <button
                             type="button"
                             className="favorites-action-button"
-                            title="Plus d'options"
+                            title="Télécharger"
                             onClick={(event) => {
                               event.stopPropagation();
-
-                              setOpenMenu(
-                                openMenu === file.id ? null : file.id,
-                              );
+                              handleDownload(file);
                             }}
                           >
-                            <FiMoreVertical />
+                            <FiDownload />
                           </button>
 
-                          {openMenu === file.id && (
-                            <div
-                              className="favorites-action-menu"
-                              onClick={(event) => event.stopPropagation()}
+                          {/* MENU */}
+                          <div className="favorites-menu-container">
+                            <button
+                              type="button"
+                              className="favorites-action-button"
+                              title="Plus d'options"
+                              onClick={(event) => {
+                                event.stopPropagation();
+
+                                setOpenMenu(
+                                  openMenu === file.id ? null : file.id,
+                                );
+                              }}
                             >
-                              <button
-                                type="button"
-                                onClick={() => handleShare(file)}
-                              >
-                                <FiShare2 />
-                                Partager
-                              </button>
+                              <FiMoreVertical />
+                            </button>
 
-                              <button
-                                type="button"
-                                onClick={() => openRenameModal(file)}
+                            {openMenu === file.id && (
+                              <div
+                                className="favorites-action-menu"
+                                onClick={(event) => event.stopPropagation()}
                               >
-                                <FiEdit2 />
-                                Renommer
-                              </button>
+                                <button
+                                  type="button"
+                                  onClick={() => handleShare(file)}
+                                >
+                                  <FiShare2 />
+                                  Partager
+                                </button>
 
-                              <button
-                                type="button"
-                                onClick={() => handleRemoveFavorite(file)}
-                              >
-                                <FiStar />
-                                Retirer des favoris
-                              </button>
+                                <button
+                                  type="button"
+                                  onClick={() => openRenameModal(file)}
+                                >
+                                  <FiEdit2 />
+                                  Renommer
+                                </button>
 
-                              <button
-                                type="button"
-                                className="delete-action"
-                                onClick={() => handleDelete(file)}
-                              >
-                                <FiTrash2 />
-                                Supprimer
-                              </button>
-                            </div>
-                          )}
+                                <button
+                                  type="button"
+                                  onClick={() => handleRemoveFavorite(file)}
+                                >
+                                  <FiStar />
+                                  Retirer des favoris
+                                </button>
+
+                                <button
+                                  type="button"
+                                  className="delete-action"
+                                  onClick={() => handleDelete(file)}
+                                >
+                                  <FiTrash2 />
+                                  Supprimer
+                                </button>
+                              </div>
+                            )}
+                          </div>
                         </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* ==================================================
+                MOBILE : CARTES
+            ================================================== */}
+
+            <div className="favorites-mobile-list">
+              {filteredFiles.map((file) => (
+                <div
+                  className="favorites-mobile-card"
+                  key={file.id}
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  {/* HEADER CARTE */}
+                  <div className="favorites-mobile-card-header">
+                    <div className="favorites-mobile-file">
+                      <div className="favorites-mobile-file-icon">
+                        {getFileIcon(file)}
                       </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+
+                      <div className="favorites-mobile-file-name">
+                        <strong title={file.name}>
+                          {file.name ||
+                            file.original_name ||
+                            "Fichier sans nom"}
+                        </strong>
+
+                        {file.original_name &&
+                          file.original_name !== file.name && (
+                            <small>{file.original_name}</small>
+                          )}
+                      </div>
+                    </div>
+
+                    {/* ÉTOILE */}
+                    <button
+                      type="button"
+                      className="favorites-mobile-star"
+                      title="Retirer des favoris"
+                      onClick={() => handleRemoveFavorite(file)}
+                    >
+                      <FiStar />
+                    </button>
+                  </div>
+
+                  {/* INFORMATIONS */}
+                  <div className="favorites-mobile-info">
+                    <div>
+                      <span>Type</span>
+                      <strong>{getFileType(file)}</strong>
+                    </div>
+
+                    <div>
+                      <span>Taille</span>
+                      <strong>{formatSize(file.size)}</strong>
+                    </div>
+
+                    <div>
+                      <span>Dossier</span>
+
+                      {file.folder_id ? (
+                        <Link
+                          to={`/dashboard/folders/${file.folder_id}`}
+                          className="favorites-mobile-folder"
+                          onClick={(event) => event.stopPropagation()}
+                        >
+                          <FiFolder />
+                          <span>{getFolderName(file.folder_id)}</span>
+                        </Link>
+                      ) : (
+                        <strong>Mes fichiers</strong>
+                      )}
+                    </div>
+
+                    <div>
+                      <span>Date</span>
+                      <strong>{formatDate(file.created_at)}</strong>
+                    </div>
+                  </div>
+
+                  {/* ACTIONS MOBILE */}
+                  <div className="favorites-mobile-actions">
+                    <button
+                      type="button"
+                      className="favorites-mobile-action"
+                      onClick={() => handleRemoveFavorite(file)}
+                    >
+                      <FiStar />
+                      Retirer
+                    </button>
+
+                    <button
+                      type="button"
+                      className="favorites-mobile-action"
+                      onClick={() => handleDownload(file)}
+                    >
+                      <FiDownload />
+                      Télécharger
+                    </button>
+
+                    <div className="favorites-mobile-menu-container">
+                      <button
+                        type="button"
+                        className="favorites-mobile-more"
+                        title="Plus d'options"
+                        onClick={(event) => {
+                          event.stopPropagation();
+
+                          setOpenMenu(openMenu === file.id ? null : file.id);
+                        }}
+                      >
+                        <FiMoreVertical />
+                      </button>
+
+                      {openMenu === file.id && (
+                        <div
+                          className="favorites-mobile-menu"
+                          onClick={(event) => event.stopPropagation()}
+                        >
+                          <button
+                            type="button"
+                            onClick={() => handleShare(file)}
+                          >
+                            <FiShare2 />
+                            Partager
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => openRenameModal(file)}
+                          >
+                            <FiEdit2 />
+                            Renommer
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveFavorite(file)}
+                          >
+                            <FiStar />
+                            Retirer des favoris
+                          </button>
+
+                          <button
+                            type="button"
+                            className="delete-action"
+                            onClick={() => handleDelete(file)}
+                          >
+                            <FiTrash2 />
+                            Supprimer
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
         )}
       </div>
 
-      {/* ==========================================
+      {/* ==================================================
           MODAL RENOMMER
-      ========================================== */}
+      ================================================== */}
 
       {renameFile && (
         <div className="favorites-modal-overlay" onClick={closeRenameModal}>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+
 import {
   FiArrowLeft,
   FiDownload,
@@ -58,6 +59,22 @@ function getFileIcon(file) {
   return "📄";
 }
 
+function getFileTypeLabel(file) {
+  const type = (file?.file_type || file?.mime_type || "").toLowerCase();
+
+  if (type.includes("image")) return "Image";
+  if (type.includes("video")) return "Vidéo";
+  if (type.includes("audio")) return "Audio";
+  if (type.includes("pdf")) return "PDF";
+  if (type.includes("word")) return "Word";
+  if (type.includes("excel") || type.includes("spreadsheet")) {
+    return "Excel";
+  }
+  if (type.includes("zip") || type.includes("rar")) return "Archive";
+
+  return "Fichier";
+}
+
 // ==================================================
 // COMPOSANT
 // ==================================================
@@ -77,17 +94,18 @@ export default function FolderDetails() {
   const [subfolders, setSubfolders] = useState([]);
 
   // ==================================================
-  // ÉTATS GÉNÉRAUX
+  // ÉTATS
   // ==================================================
 
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
   const [search, setSearch] = useState("");
 
-  // Menu fichiers
-  const [menuOpen, setMenuOpen] = useState(null);
+  // ==================================================
+  // MENUS
+  // ==================================================
 
-  // Menu sous-dossiers
+  const [menuOpen, setMenuOpen] = useState(null);
   const [folderMenuOpen, setFolderMenuOpen] = useState(null);
 
   // ==================================================
@@ -128,7 +146,7 @@ export default function FolderDetails() {
   const [previewLoading, setPreviewLoading] = useState(false);
 
   // ==================================================
-  // DÉPLACER UN FICHIER
+  // DÉPLACER FICHIER
   // ==================================================
 
   const [moveFile, setMoveFile] = useState(null);
@@ -156,10 +174,7 @@ export default function FolderDetails() {
       setLoading(true);
       setMessage("");
 
-      // ----------------------------------------------
       // DOSSIER ACTUEL
-      // ----------------------------------------------
-
       const { data: folderData, error: folderError } = await supabase
         .from("folders")
         .select("*")
@@ -169,19 +184,14 @@ export default function FolderDetails() {
 
       if (folderError) {
         console.error(folderError);
-
         setFolder(null);
         setMessage("Impossible de charger le dossier.");
-
         return;
       }
 
       setFolder(folderData);
 
-      // ----------------------------------------------
       // DOSSIER PARENT
-      // ----------------------------------------------
-
       if (folderData.parent_id) {
         const { data: parentData, error: parentError } = await supabase
           .from("folders")
@@ -200,10 +210,7 @@ export default function FolderDetails() {
         setParentFolder(null);
       }
 
-      // ----------------------------------------------
       // SOUS-DOSSIERS
-      // ----------------------------------------------
-
       const { data: foldersData, error: foldersError } = await supabase
         .from("folders")
         .select("*")
@@ -218,10 +225,7 @@ export default function FolderDetails() {
         setSubfolders(foldersData || []);
       }
 
-      // ----------------------------------------------
       // FICHIERS
-      // ----------------------------------------------
-
       const { data: filesData, error: filesError } = await supabase
         .from("files")
         .select("*")
@@ -246,7 +250,7 @@ export default function FolderDetails() {
   };
 
   // ==================================================
-  // CRÉER UN SOUS-DOSSIER
+  // CRÉER SOUS-DOSSIER
   // ==================================================
 
   const handleCreateSubfolder = async () => {
@@ -290,7 +294,7 @@ export default function FolderDetails() {
   };
 
   // ==================================================
-  // RENOMMER LE DOSSIER ACTUEL
+  // RENOMMER DOSSIER ACTUEL
   // ==================================================
 
   const openRenameCurrentFolder = () => {
@@ -300,7 +304,7 @@ export default function FolderDetails() {
   };
 
   // ==================================================
-  // RENOMMER UN DOSSIER
+  // RENOMMER DOSSIER
   // ==================================================
 
   const handleRenameFolder = async () => {
@@ -327,7 +331,6 @@ export default function FolderDetails() {
         return;
       }
 
-      // Si c'est le dossier actuel
       if (renameFolder.id === folder.id) {
         setFolder((current) => ({
           ...current,
@@ -335,7 +338,6 @@ export default function FolderDetails() {
         }));
       }
 
-      // Si c'est un sous-dossier
       setSubfolders((current) =>
         current.map((item) =>
           item.id === renameFolder.id
@@ -360,17 +362,13 @@ export default function FolderDetails() {
   };
 
   // ==================================================
-  // SUPPRIMER UN DOSSIER
+  // SUPPRIMER DOSSIER
   // ==================================================
 
   const handleDeleteFolder = async (folderToDelete, isCurrent = false) => {
     try {
       setFolderMenuOpen(null);
       setMessage("");
-
-      // ----------------------------------------------
-      // Vérifier les sous-dossiers
-      // ----------------------------------------------
 
       const { data: children, error: childrenError } = await supabase
         .from("folders")
@@ -383,10 +381,6 @@ export default function FolderDetails() {
         setMessage("Impossible de vérifier le contenu du dossier.");
         return;
       }
-
-      // ----------------------------------------------
-      // Vérifier les fichiers
-      // ----------------------------------------------
 
       const { data: folderFiles, error: filesError } = await supabase
         .from("files")
@@ -401,31 +395,18 @@ export default function FolderDetails() {
         return;
       }
 
-      // ----------------------------------------------
-      // DOSSIER NON VIDE
-      // ----------------------------------------------
-
       if ((children?.length || 0) > 0 || (folderFiles?.length || 0) > 0) {
         setMessage(
           "Impossible de supprimer ce dossier car il contient des fichiers ou des sous-dossiers.",
         );
-
         return;
       }
-
-      // ----------------------------------------------
-      // CONFIRMATION
-      // ----------------------------------------------
 
       const confirmed = window.confirm(
         `Voulez-vous vraiment supprimer le dossier "${folderToDelete.name}" ?`,
       );
 
       if (!confirmed) return;
-
-      // ----------------------------------------------
-      // SUPPRESSION
-      // ----------------------------------------------
 
       const { error: deleteError } = await supabase
         .from("folders")
@@ -439,10 +420,6 @@ export default function FolderDetails() {
         return;
       }
 
-      // ----------------------------------------------
-      // DOSSIER ACTUEL
-      // ----------------------------------------------
-
       if (isCurrent) {
         if (parentFolder) {
           navigate(`/dashboard/folders/${parentFolder.id}`);
@@ -452,10 +429,6 @@ export default function FolderDetails() {
 
         return;
       }
-
-      // ----------------------------------------------
-      // SOUS-DOSSIER
-      // ----------------------------------------------
 
       setSubfolders((current) =>
         current.filter((item) => item.id !== folderToDelete.id),
@@ -488,10 +461,6 @@ export default function FolderDetails() {
 
       const filePath = `${user.id}/${Date.now()}-${safeName}`;
 
-      // ----------------------------------------------
-      // STORAGE
-      // ----------------------------------------------
-
       const { error: uploadError } = await supabase.storage
         .from("files")
         .upload(filePath, selectedFile);
@@ -501,10 +470,6 @@ export default function FolderDetails() {
         setMessage("Erreur pendant l'importation.");
         return;
       }
-
-      // ----------------------------------------------
-      // DATABASE
-      // ----------------------------------------------
 
       const { error: insertError } = await supabase.from("files").insert({
         user_id: user.id,
@@ -525,6 +490,7 @@ export default function FolderDetails() {
         await supabase.storage.from("files").remove([filePath]);
 
         setMessage("Le fichier n'a pas pu être enregistré.");
+
         return;
       }
 
@@ -554,10 +520,22 @@ export default function FolderDetails() {
     if (type.includes("pdf")) return "pdf";
 
     const name = (file?.name || file?.original_name || "").toLowerCase();
-    if (/\.(png|jpe?g|gif|webp|bmp|svg)$/.test(name)) return "image";
-    if (/\.(mp4|webm|ogg|mov)$/.test(name)) return "video";
-    if (/\.(mp3|wav|ogg|m4a|aac)$/.test(name)) return "audio";
-    if (/\.pdf$/.test(name)) return "pdf";
+
+    if (/\.(png|jpe?g|gif|webp|bmp|svg)$/.test(name)) {
+      return "image";
+    }
+
+    if (/\.(mp4|webm|ogg|mov)$/.test(name)) {
+      return "video";
+    }
+
+    if (/\.(mp3|wav|ogg|m4a|aac)$/.test(name)) {
+      return "audio";
+    }
+
+    if (/\.pdf$/.test(name)) {
+      return "pdf";
+    }
 
     return "unsupported";
   };
@@ -598,7 +576,7 @@ export default function FolderDetails() {
   };
 
   // ==================================================
-  // DÉPLACER UN FICHIER
+  // DÉPLACER FICHIER
   // ==================================================
 
   const loadMoveFolders = async (file) => {
@@ -640,9 +618,11 @@ export default function FolderDetails() {
 
     while (current?.parent_id) {
       if (visited.has(current.parent_id)) break;
+
       visited.add(current.parent_id);
 
       const parent = moveFolders.find((item) => item.id === current.parent_id);
+
       if (!parent) break;
 
       parents.unshift(parent.name);
@@ -669,7 +649,9 @@ export default function FolderDetails() {
 
       const { error } = await supabase
         .from("files")
-        .update({ folder_id: moveFolderId })
+        .update({
+          folder_id: moveFolderId,
+        })
         .eq("id", moveFile.id)
         .eq("user_id", user.id);
 
@@ -685,6 +667,7 @@ export default function FolderDetails() {
 
       setMoveFile(null);
       setMoveFolderId("");
+
       setMessage("Fichier déplacé avec succès.");
     } catch (error) {
       console.error(error);
@@ -899,54 +882,6 @@ export default function FolderDetails() {
   };
 
   // ==================================================
-  // SUPPRIMER FICHIER
-  // ==================================================
-
-  const handleDelete = async (file) => {
-    const confirmed = window.confirm(
-      `Voulez-vous vraiment supprimer "${file.name}" ?`,
-    );
-
-    if (!confirmed) return;
-
-    try {
-      setMenuOpen(null);
-      setMessage("");
-
-      const { error: dbError } = await supabase
-        .from("files")
-        .update({
-          is_deleted: true,
-        })
-        .eq("id", file.id)
-        .eq("user_id", user.id);
-
-      if (dbError) {
-        console.error(dbError);
-        setMessage("Impossible de supprimer le fichier.");
-        return;
-      }
-
-      const { error: storageError } = await supabase.storage
-        .from("files")
-        .remove([file.storage_path]);
-
-      if (storageError) {
-        console.warn("Erreur Storage :", storageError);
-      }
-
-      setFiles((currentFiles) =>
-        currentFiles.filter((item) => item.id !== file.id),
-      );
-
-      setMessage("Fichier supprimé avec succès.");
-    } catch (error) {
-      console.error(error);
-      setMessage("Erreur lors de la suppression.");
-    }
-  };
-
-  // ==================================================
   // RECHERCHE
   // ==================================================
 
@@ -962,7 +897,10 @@ export default function FolderDetails() {
     return (
       <div className="folder-page">
         <div className="folder-content">
-          <p>Chargement du dossier...</p>
+          <div className="folder-loading">
+            <div className="folder-loading-spinner" />
+            <p>Chargement du dossier...</p>
+          </div>
         </div>
       </div>
     );
@@ -983,9 +921,7 @@ export default function FolderDetails() {
 
           <div className="folder-empty">
             <FiFolder size={48} />
-
             <h2>Dossier introuvable</h2>
-
             <p>Ce dossier n'existe pas ou vous n'avez pas accès.</p>
           </div>
         </div>
@@ -998,11 +934,15 @@ export default function FolderDetails() {
   // ==================================================
 
   return (
-    <div className="folder-page">
+    <div
+      className="folder-page"
+      onClick={() => {
+        setMenuOpen(null);
+        setFolderMenuOpen(null);
+      }}
+    >
       <div className="folder-content">
-        {/* ==================================================
-            BREADCRUMB
-        ================================================== */}
+        {/* BREADCRUMB */}
 
         <div className="folder-breadcrumb">
           <Link to="/dashboard">Mon espace</Link>
@@ -1022,15 +962,15 @@ export default function FolderDetails() {
           <span>{folder.name}</span>
         </div>
 
-        {/* ==================================================
-            HEADER
-        ================================================== */}
+        {/* HEADER */}
 
         <div className="folder-title-row">
           <div className="folder-title-area">
             <button
               className="folder-back-button"
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
+
                 if (parentFolder) {
                   navigate(`/dashboard/folders/${parentFolder.id}`);
                 } else {
@@ -1046,7 +986,7 @@ export default function FolderDetails() {
               <FiFolder />
             </div>
 
-            <div>
+            <div className="folder-title-info">
               <h1 className="folder-title">{folder.name}</h1>
 
               <p>
@@ -1059,39 +999,48 @@ export default function FolderDetails() {
             </div>
           </div>
 
-          {/* ==================================================
-              ACTIONS DOSSIER
-          ================================================== */}
+          {/* ACTIONS DOSSIER */}
 
           <div className="folder-header-actions">
             <button
               className="folder-create-button"
-              onClick={() => setShowFolderModal(true)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowFolderModal(true);
+              }}
             >
               <FiFolder />
-              Nouveau dossier
+              <span>Nouveau dossier</span>
             </button>
 
             <button
               className="folder-manage-button"
-              onClick={openRenameCurrentFolder}
+              onClick={(e) => {
+                e.stopPropagation();
+                openRenameCurrentFolder();
+              }}
             >
               <FiEdit2 />
-              Renommer
+              <span>Renommer</span>
             </button>
 
             <button
               className="folder-delete-button"
-              onClick={() => handleDeleteFolder(folder, true)}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleDeleteFolder(folder, true);
+              }}
             >
               <FiTrash2 />
-              Supprimer
+              <span>Supprimer</span>
             </button>
 
             <label className="folder-upload-button">
               <FiUpload />
 
-              {uploading ? "Importation..." : "Importer un fichier"}
+              <span>
+                {uploading ? "Importation..." : "Importer un fichier"}
+              </span>
 
               <input
                 type="file"
@@ -1103,23 +1052,25 @@ export default function FolderDetails() {
           </div>
         </div>
 
-        {/* ==================================================
-            MESSAGE
-        ================================================== */}
+        {/* MESSAGE */}
 
         {message && (
           <div className="folder-message">
             <span>{message}</span>
 
-            <button onClick={() => setMessage("")} aria-label="Fermer">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setMessage("");
+              }}
+              aria-label="Fermer"
+            >
               <FiX />
             </button>
           </div>
         )}
 
-        {/* ==================================================
-            RECHERCHE
-        ================================================== */}
+        {/* RECHERCHE */}
 
         <div className="folder-toolbar">
           <div className="folder-search">
@@ -1130,6 +1081,7 @@ export default function FolderDetails() {
               placeholder="Rechercher un fichier..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
+              onClick={(e) => e.stopPropagation()}
             />
           </div>
 
@@ -1139,9 +1091,7 @@ export default function FolderDetails() {
           </span>
         </div>
 
-        {/* ==================================================
-            SOUS-DOSSIERS
-        ================================================== */}
+        {/* SOUS-DOSSIERS */}
 
         {subfolders.length > 0 && (
           <div className="folder-subfolders-section">
@@ -1159,6 +1109,7 @@ export default function FolderDetails() {
                   <Link
                     to={`/dashboard/folders/${subfolder.id}`}
                     className="folder-subfolder-card"
+                    onClick={(e) => e.stopPropagation()}
                   >
                     <div className="folder-subfolder-icon">
                       <FiFolder />
@@ -1171,15 +1122,15 @@ export default function FolderDetails() {
                     </div>
                   </Link>
 
-                  {/* MENU SOUS-DOSSIER */}
-
-                  <div className="folder-subfolder-menu">
+                  <div
+                    className="folder-subfolder-menu"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     <button
                       className="folder-subfolder-menu-button"
                       title="Options"
                       onClick={(e) => {
                         e.preventDefault();
-                        e.stopPropagation();
 
                         setFolderMenuOpen(
                           folderMenuOpen === subfolder.id ? null : subfolder.id,
@@ -1190,12 +1141,12 @@ export default function FolderDetails() {
                     </button>
 
                     {folderMenuOpen === subfolder.id && (
-                      <div className="folder-action-menu folder-folder-menu">
+                      <div
+                        className="folder-action-menu folder-folder-menu"
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         <button
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-
+                          onClick={() => {
                             setFolderMenuOpen(null);
                             setRenameFolder(subfolder);
                             setNewFolderRename(subfolder.name || "");
@@ -1207,12 +1158,7 @@ export default function FolderDetails() {
 
                         <button
                           className="delete-action"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-
-                            handleDeleteFolder(subfolder);
-                          }}
+                          onClick={() => handleDeleteFolder(subfolder)}
                         >
                           <FiTrash2 />
                           Supprimer
@@ -1226,9 +1172,7 @@ export default function FolderDetails() {
           </div>
         )}
 
-        {/* ==================================================
-            FICHIERS
-        ================================================== */}
+        {/* FICHIERS */}
 
         <div className="folder-files-section">
           {filteredFiles.length === 0 ? (
@@ -1270,19 +1214,30 @@ export default function FolderDetails() {
                   <div>Actions</div>
                 </div>
 
-                {/* FICHIERS */}
+                {/* LIGNES */}
 
                 {filteredFiles.map((file) => (
                   <div className="folder-file-row" key={file.id}>
                     {/* NOM */}
 
-                    <div className="folder-file-name">
-                      <div className="folder-file-icon">
+                    <div className="folder-file-name" data-label="Nom">
+                      <button
+                        type="button"
+                        onClick={() => handlePreview(file)}
+                        className="folder-file-icon"
+                        title="Aperçu"
+                      >
                         {getFileIcon(file)}
-                      </div>
+                      </button>
 
                       <div className="folder-file-name-text">
-                        <span title={file.name}>{file.name}</span>
+                        <button
+                          type="button"
+                          onClick={() => handlePreview(file)}
+                          title={file.name}
+                        >
+                          {file.name}
+                        </button>
 
                         {file.is_favorite && (
                           <FiStar
@@ -1295,25 +1250,25 @@ export default function FolderDetails() {
 
                     {/* TYPE */}
 
-                    <div className="folder-file-type">
-                      {file.file_type || file.mime_type || "Fichier"}
+                    <div className="folder-file-type" data-label="Type">
+                      {getFileTypeLabel(file)}
                     </div>
 
                     {/* TAILLE */}
 
-                    <div className="folder-file-size">
+                    <div className="folder-file-size" data-label="Taille">
                       {formatSize(file.size)}
                     </div>
 
                     {/* DATE */}
 
-                    <div className="folder-file-date">
+                    <div className="folder-file-date" data-label="Date">
                       {formatDate(file.created_at)}
                     </div>
 
                     {/* ACTIONS */}
 
-                    <div className="folder-file-actions">
+                    <div className="folder-file-actions" data-label="Actions">
                       <button
                         className="folder-action-button"
                         title="Télécharger"
@@ -1348,15 +1303,20 @@ export default function FolderDetails() {
                         <button
                           className="folder-action-button"
                           title="Plus"
-                          onClick={() =>
-                            setMenuOpen(menuOpen === file.id ? null : file.id)
-                          }
+                          onClick={(e) => {
+                            e.stopPropagation();
+
+                            setMenuOpen(menuOpen === file.id ? null : file.id);
+                          }}
                         >
                           <FiMoreVertical />
                         </button>
 
                         {menuOpen === file.id && (
-                          <div className="folder-action-menu">
+                          <div
+                            className="folder-action-menu"
+                            onClick={(e) => e.stopPropagation()}
+                          >
                             <button onClick={() => handlePreview(file)}>
                               <FiEye />
                               Aperçu
@@ -1374,6 +1334,7 @@ export default function FolderDetails() {
 
                             <button onClick={() => handleFavorite(file)}>
                               <FiStar />
+
                               {file.is_favorite
                                 ? "Retirer des favoris"
                                 : "Ajouter aux favoris"}
@@ -1409,7 +1370,7 @@ export default function FolderDetails() {
       </div>
 
       {/* ==================================================
-          MODAL : APERÇU
+          MODAL APERÇU
       ================================================== */}
 
       {previewFile && (
@@ -1424,6 +1385,7 @@ export default function FolderDetails() {
             <div className="folder-modal-header">
               <div>
                 <h2>Aperçu</h2>
+
                 <small>{previewFile.name || previewFile.original_name}</small>
               </div>
 
@@ -1435,6 +1397,7 @@ export default function FolderDetails() {
             <div className="folder-preview-body">
               {previewLoading ? (
                 <div className="folder-preview-empty">
+                  <div className="folder-loading-spinner" />
                   <p>Chargement de l'aperçu...</p>
                 </div>
               ) : previewUrl ? (
@@ -1486,11 +1449,14 @@ export default function FolderDetails() {
                   return (
                     <div className="folder-preview-empty">
                       <FiFile size={48} />
+
                       <h3>Aperçu non disponible</h3>
+
                       <p>
                         Ce type de fichier ne peut pas être prévisualisé
                         directement.
                       </p>
+
                       <button
                         className="folder-modal-confirm"
                         onClick={() => handleDownload(previewFile)}
@@ -1513,7 +1479,7 @@ export default function FolderDetails() {
       )}
 
       {/* ==================================================
-          MODAL : DÉPLACER
+          MODAL DÉPLACER
       ================================================== */}
 
       {moveFile && (
@@ -1525,6 +1491,7 @@ export default function FolderDetails() {
             <div className="folder-modal-header">
               <div>
                 <h2>Déplacer le fichier</h2>
+
                 <small title={moveFile.name}>
                   {moveFile.name || moveFile.original_name}
                 </small>
@@ -1553,6 +1520,7 @@ export default function FolderDetails() {
                   {moveFolders.map((folderItem) => (
                     <option key={folderItem.id} value={folderItem.id}>
                       {getFolderLabel(folderItem)}
+
                       {folderItem.id === moveFile.folder_id ? " (actuel)" : ""}
                     </option>
                   ))}
@@ -1574,6 +1542,7 @@ export default function FolderDetails() {
                 disabled={movingFile || loadingMoveFolders || !moveFolderId}
               >
                 <FiMove />
+
                 {movingFile ? "Déplacement..." : "Déplacer"}
               </button>
             </div>
@@ -1582,7 +1551,7 @@ export default function FolderDetails() {
       )}
 
       {/* ==================================================
-          MODAL : NOUVEAU DOSSIER
+          MODAL NOUVEAU DOSSIER
       ================================================== */}
 
       {showFolderModal && (
@@ -1637,7 +1606,7 @@ export default function FolderDetails() {
       )}
 
       {/* ==================================================
-          MODAL : RENOMMER FICHIER
+          MODAL RENOMMER FICHIER
       ================================================== */}
 
       {renameFile && (
@@ -1687,7 +1656,7 @@ export default function FolderDetails() {
       )}
 
       {/* ==================================================
-          MODAL : RENOMMER DOSSIER
+          MODAL RENOMMER DOSSIER
       ================================================== */}
 
       {renameFolder && (

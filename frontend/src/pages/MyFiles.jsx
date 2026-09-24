@@ -1101,12 +1101,18 @@ export default function MyFiles() {
 
                     <td>
                       <div className="my-files-name-cell">
-                        <div className="my-files-file-icon">
+                        <div
+                          type="button"
+                          onClick={() => handlePreview(file)}
+                          className="my-files-file-icon"
+                        >
                           {getFileIcon(file)}
                         </div>
 
                         <div className="my-files-name-info">
                           <span
+                            type="button"
+                            onClick={() => handlePreview(file)}
                             className="my-files-file-name"
                             title={file.name}
                           >

@@ -1,117 +1,143 @@
-/* ======================================================
-   TRASH PAGE
-====================================================== */
+/* =========================================================
+   PAGE CORBEILLE
+========================================================= */
 
 .trash-page {
   min-height: 100vh;
-  padding: 30px 20px 50px;
-  background: #f8fafc;
+  background: #f7f8fa;
+  padding: 32px 24px 50px;
+  box-sizing: border-box;
 }
 
 .trash-container {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1250px;
   margin: 0 auto;
 }
 
-/* ======================================================
+/* =========================================================
    HEADER
-====================================================== */
+========================================================= */
 
 .trash-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 25px;
   margin-bottom: 25px;
 }
 
 .trash-header-left {
   display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.trash-header h1 {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-
-  margin: 0 0 5px;
-
-  color: #111827;
-  font-size: 30px;
-  font-weight: 700;
-}
-
-.trash-header h1 svg {
-  color: #dc2626;
-}
-
-.trash-header p {
-  margin: 0;
-
-  color: #6b7280;
-
-  font-size: 14px;
+  align-items: flex-start;
+  gap: 28px;
 }
 
 .trash-back-button {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
 
-  padding: 10px 13px;
+  padding: 10px 15px;
 
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
+  border: 1px solid #e1e5eb;
+  border-radius: 9px;
 
-  background: white;
-  color: #111827;
+  background: #ffffff;
+  color: #333;
 
   text-decoration: none;
-
   font-size: 14px;
+  font-weight: 600;
 
-  transition: 0.2s;
+  white-space: nowrap;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .trash-back-button:hover {
-  background: #f3f4f6;
+  background: #f2f4f7;
+  border-color: #d6dbe1;
+  transform: translateY(-1px);
 }
 
-/* ======================================================
-   VIDER CORBEILLE
-====================================================== */
+.trash-back-button svg {
+  width: 17px;
+  height: 17px;
+}
 
-.trash-empty-button {
+/* =========================================================
+   TITRE
+========================================================= */
+
+.trash-title h1 {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+
+  margin: 0 0 6px;
+
+  color: #1f2937;
+  font-size: 29px;
+  font-weight: 700;
+}
+
+.trash-title h1 svg {
+  width: 27px;
+  height: 27px;
+}
+
+.trash-title p {
+  margin: 0;
+
+  color: #727b87;
+  font-size: 14px;
+}
+
+/* =========================================================
+   BOUTON VIDER
+========================================================= */
+
+.trash-empty-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
 
   padding: 11px 16px;
 
-  border: 1px solid #fecaca;
-  border-radius: 8px;
+  border: 0;
+  border-radius: 9px;
 
-  background: white;
-  color: #dc2626;
+  background: #dc3545;
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 600;
 
   cursor: pointer;
 
-  font-size: 14px;
-  font-weight: 500;
-
-  transition: 0.2s;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .trash-empty-button:hover {
-  background: #fef2f2;
+  background: #c82333;
+  transform: translateY(-1px);
 }
 
-/* ======================================================
+.trash-empty-button svg {
+  width: 17px;
+  height: 17px;
+}
+
+/* =========================================================
    MESSAGE
-====================================================== */
+========================================================= */
 
 .trash-message {
   display: flex;
@@ -120,14 +146,14 @@
   gap: 15px;
 
   margin-bottom: 20px;
-  padding: 13px 16px;
+  padding: 13px 15px;
 
-  border: 1px solid #bbf7d0;
-  border-radius: 9px;
+  border: 1px solid #dfe4ea;
+  border-radius: 10px;
 
-  background: #f0fdf4;
-  color: #166534;
+  background: #ffffff;
 
+  color: #374151;
   font-size: 14px;
 }
 
@@ -139,32 +165,35 @@
   width: 30px;
   height: 30px;
 
-  border: none;
-  background: transparent;
+  border: 0;
+  border-radius: 7px;
 
-  color: inherit;
+  background: transparent;
+  color: #6b7280;
 
   cursor: pointer;
 }
 
-/* ======================================================
+.trash-message button:hover {
+  background: #f1f3f5;
+}
+
+/* =========================================================
    INFO
-====================================================== */
+========================================================= */
 
 .trash-info {
   display: flex;
   align-items: center;
   gap: 13px;
 
-  width: fit-content;
-
   margin-bottom: 20px;
-  padding: 12px 16px;
+  padding: 16px 18px;
 
-  border: 1px solid #e5e7eb;
-  border-radius: 9px;
+  border: 1px solid #e4e8ed;
+  border-radius: 12px;
 
-  background: white;
+  background: #ffffff;
 }
 
 .trash-info-icon {
@@ -172,107 +201,102 @@
   align-items: center;
   justify-content: center;
 
-  width: 38px;
-  height: 38px;
+  width: 43px;
+  height: 43px;
 
-  border-radius: 8px;
+  border-radius: 10px;
 
-  background: #fef2f2;
-  color: #dc2626;
+  background: #f1f3f5;
+  color: #555f6d;
 }
 
-.trash-info strong {
-  display: block;
-
-  color: #111827;
-
-  font-size: 14px;
+.trash-info-icon svg {
+  width: 21px;
+  height: 21px;
 }
 
-.trash-info span {
-  display: block;
-
-  margin-top: 2px;
-
-  color: #6b7280;
-
-  font-size: 12px;
+.trash-info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
-/* ======================================================
+.trash-info-content strong {
+  color: #20252b;
+  font-size: 15px;
+}
+
+.trash-info-content span {
+  color: #7b8490;
+  font-size: 13px;
+}
+
+/* =========================================================
    TABLE
-====================================================== */
+========================================================= */
 
 .trash-table-wrapper {
   width: 100%;
+  overflow: visible;
 
-  overflow-x: auto;
-
-  background: white;
-
-  border: 1px solid #e5e7eb;
+  border: 1px solid #e2e6eb;
   border-radius: 12px;
 
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  background: #ffffff;
 }
 
 .trash-table {
   width: 100%;
-  min-width: 750px;
-
   border-collapse: collapse;
-
-  text-align: left;
 }
 
 .trash-table thead {
-  background: #f9fafb;
+  background: #f8f9fb;
 }
 
 .trash-table th {
-  padding: 15px 16px;
+  padding: 15px 17px;
 
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e8ec;
 
-  color: #6b7280;
+  color: #727b87;
 
   font-size: 11px;
   font-weight: 700;
 
+  text-align: left;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-
-  white-space: nowrap;
+  letter-spacing: 0.04em;
 }
 
 .trash-table td {
-  padding: 14px 16px;
+  padding: 16px 17px;
 
-  border-bottom: 1px solid #f1f5f9;
-
-  color: #374151;
-
-  font-size: 14px;
+  border-bottom: 1px solid #edf0f2;
 
   vertical-align: middle;
 }
 
 .trash-table tbody tr:last-child td {
-  border-bottom: none;
+  border-bottom: 0;
+}
+
+.trash-table tbody tr {
+  transition: background 0.2s ease;
 }
 
 .trash-table tbody tr:hover {
-  background: #fafafa;
+  background: #fafbfc;
 }
 
-/* ======================================================
+/* =========================================================
    FICHIER
-====================================================== */
+========================================================= */
 
 .trash-file {
   display: flex;
   align-items: center;
-  gap: 11px;
+  gap: 12px;
 
   min-width: 230px;
 }
@@ -282,57 +306,38 @@
   align-items: center;
   justify-content: center;
 
+  flex: 0 0 auto;
+
   width: 42px;
   height: 42px;
 
-  flex-shrink: 0;
-
   border-radius: 9px;
 
-  background: #f3f4f6;
-
-  color: #6b7280;
-
-  font-size: 20px;
+  background: #f0f2f5;
+  color: #59636f;
 }
 
-.trash-file-icon.images {
-  background: #eff6ff;
-  color: #2563eb;
-}
-
-.trash-file-icon.videos {
-  background: #faf5ff;
-  color: #9333ea;
-}
-
-.trash-file-icon.audio {
-  background: #f0fdf4;
-  color: #16a34a;
-}
-
-.trash-file-icon.documents {
-  background: #fff7ed;
-  color: #ea580c;
+.trash-file-icon svg {
+  width: 20px;
+  height: 20px;
 }
 
 .trash-file-info {
   display: flex;
   flex-direction: column;
-  gap: 3px;
 
   min-width: 0;
+  gap: 3px;
 }
 
 .trash-file-info span {
-  display: block;
-
-  max-width: 330px;
+  max-width: 270px;
 
   overflow: hidden;
 
-  color: #111827;
+  color: #24292f;
 
+  font-size: 14px;
   font-weight: 600;
 
   text-overflow: ellipsis;
@@ -340,11 +345,11 @@
 }
 
 .trash-file-info small {
-  max-width: 300px;
+  max-width: 270px;
 
   overflow: hidden;
 
-  color: #9ca3af;
+  color: #929aa4;
 
   font-size: 11px;
 
@@ -352,9 +357,9 @@
   white-space: nowrap;
 }
 
-/* ======================================================
+/* =========================================================
    TYPE
-====================================================== */
+========================================================= */
 
 .trash-type {
   display: inline-flex;
@@ -363,35 +368,33 @@
 
   border-radius: 6px;
 
-  background: #f3f4f6;
-  color: #4b5563;
+  background: #f1f3f5;
 
-  font-size: 11px;
+  color: #616b77;
+
+  font-size: 12px;
   font-weight: 600;
 }
 
-/* ======================================================
+/* =========================================================
    TAILLE / DATE
-====================================================== */
+========================================================= */
 
 .trash-size,
 .trash-date {
-  color: #6b7280;
-
+  color: #69727e;
   font-size: 13px;
-
-  white-space: nowrap;
 }
 
-/* ======================================================
-   ACTIONS
-====================================================== */
+/* =========================================================
+   ACTIONS DESKTOP
+========================================================= */
 
 .trash-actions {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 6px;
+  gap: 7px;
 }
 
 .trash-restore-button,
@@ -403,64 +406,62 @@
   width: 35px;
   height: 35px;
 
-  border-radius: 7px;
+  border: 1px solid #e0e4e8;
+  border-radius: 8px;
+
+  background: #ffffff;
+  color: #59636f;
 
   cursor: pointer;
 
-  transition: 0.2s;
-}
-
-.trash-restore-button {
-  border: 1px solid #bbf7d0;
-
-  background: #f0fdf4;
-
-  color: #16a34a;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .trash-restore-button:hover {
-  background: #dcfce7;
+  background: #f0f7f2;
+  border-color: #cde4d3;
+  color: #2d7a43;
 }
+
+.trash-menu-button:hover {
+  background: #f3f4f6;
+  border-color: #d8dce1;
+}
+
+.trash-restore-button svg,
+.trash-menu-button svg {
+  width: 17px;
+  height: 17px;
+}
+
+/* =========================================================
+   MENU DESKTOP
+========================================================= */
 
 .trash-menu-container {
   position: relative;
 }
 
-.trash-menu-button {
-  border: none;
-
-  background: transparent;
-
-  color: #6b7280;
-}
-
-.trash-menu-button:hover {
-  background: #f3f4f6;
-  color: #111827;
-}
-
-/* ======================================================
-   MENU
-====================================================== */
-
 .trash-action-menu {
   position: absolute;
 
-  top: 40px;
+  top: calc(100% + 7px);
   right: 0;
 
-  z-index: 50;
+  z-index: 100;
 
   width: 210px;
 
   padding: 6px;
 
-  border: 1px solid #e5e7eb;
-  border-radius: 9px;
+  border: 1px solid #e0e4e8;
+  border-radius: 10px;
 
-  background: white;
+  background: #ffffff;
 
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
 }
 
 .trash-action-menu button {
@@ -470,45 +471,40 @@
 
   width: 100%;
 
-  padding: 10px;
+  padding: 10px 11px;
 
-  border: none;
-  border-radius: 6px;
+  border: 0;
+  border-radius: 7px;
 
   background: transparent;
-
-  color: #374151;
-
-  cursor: pointer;
-
-  text-align: left;
+  color: #40464e;
 
   font-size: 13px;
+  text-align: left;
+
+  cursor: pointer;
 }
 
 .trash-action-menu button:hover {
-  background: #f3f4f6;
-  color: #111827;
+  background: #f4f5f7;
 }
 
 .trash-action-menu button svg {
-  flex-shrink: 0;
-
-  font-size: 15px;
+  width: 16px;
+  height: 16px;
 }
 
 .trash-action-menu .delete-action {
-  color: #dc2626;
+  color: #dc3545;
 }
 
 .trash-action-menu .delete-action:hover {
-  background: #fef2f2;
-  color: #dc2626;
+  background: #fff1f2;
 }
 
-/* ======================================================
+/* =========================================================
    LOADING
-====================================================== */
+========================================================= */
 
 .trash-loading {
   display: flex;
@@ -518,26 +514,31 @@
 
   min-height: 300px;
 
-  border: 1px solid #e5e7eb;
+  border: 1px solid #e3e7eb;
   border-radius: 12px;
 
-  background: white;
-
-  color: #6b7280;
+  background: #ffffff;
 }
 
 .trash-spinner {
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
 
-  margin-bottom: 15px;
+  margin-bottom: 14px;
 
   border: 3px solid #e5e7eb;
-  border-top-color: #111827;
+  border-top-color: #59636f;
 
   border-radius: 50%;
 
   animation: trash-spin 0.8s linear infinite;
+}
+
+.trash-loading p {
+  margin: 0;
+
+  color: #747d88;
+  font-size: 14px;
 }
 
 @keyframes trash-spin {
@@ -546,15 +547,9 @@
   }
 }
 
-.trash-loading p {
-  margin: 0;
-
-  font-size: 14px;
-}
-
-/* ======================================================
+/* =========================================================
    CORBEILLE VIDE
-====================================================== */
+========================================================= */
 
 .trash-empty {
   display: flex;
@@ -562,14 +557,14 @@
   align-items: center;
   justify-content: center;
 
-  min-height: 350px;
+  min-height: 340px;
 
   padding: 30px;
 
-  border: 1px solid #e5e7eb;
+  border: 1px solid #e3e7eb;
   border-radius: 12px;
 
-  background: white;
+  background: #ffffff;
 
   text-align: center;
 }
@@ -579,32 +574,34 @@
   align-items: center;
   justify-content: center;
 
-  width: 70px;
-  height: 70px;
+  width: 68px;
+  height: 68px;
 
-  margin-bottom: 18px;
+  margin-bottom: 17px;
 
   border-radius: 50%;
 
-  background: #f3f4f6;
+  background: #f1f3f5;
+  color: #737d88;
+}
 
-  color: #9ca3af;
-
-  font-size: 30px;
+.trash-empty-icon svg {
+  width: 29px;
+  height: 29px;
 }
 
 .trash-empty h2 {
   margin: 0 0 8px;
 
-  color: #111827;
+  color: #252a30;
 
-  font-size: 20px;
+  font-size: 21px;
 }
 
 .trash-empty p {
   margin: 0 0 20px;
 
-  color: #6b7280;
+  color: #7b8490;
 
   font-size: 14px;
 }
@@ -614,69 +611,479 @@
   align-items: center;
   gap: 8px;
 
-  padding: 10px 16px;
+  padding: 10px 15px;
 
   border-radius: 8px;
 
-  background: #111827;
-  color: white;
+  background: #252a30;
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 600;
 
   text-decoration: none;
 
-  font-size: 13px;
-
-  transition: 0.2s;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .trash-files-link:hover {
-  background: #374151;
+  background: #111418;
+  transform: translateY(-1px);
 }
 
-/* ======================================================
-   RESPONSIVE
-====================================================== */
+/* =========================================================
+   MOBILE LIST
+========================================================= */
 
-@media (max-width: 800px) {
+.trash-mobile-list {
+  display: none;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+  .trash-page {
+    padding: 18px 12px 35px;
+  }
+
+  .trash-container {
+    max-width: 100%;
+  }
+
+  /* HEADER */
+
   .trash-header {
-    align-items: flex-start;
+    display: flex;
     flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+
+    margin-bottom: 20px;
   }
 
   .trash-header-left {
-    width: 100%;
-    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 17px;
+  }
+
+  .trash-back-button {
+    align-self: flex-start;
+
+    width: auto;
+    max-width: max-content;
+
+    padding: 9px 12px;
+
+    font-size: 13px;
+  }
+
+  .trash-title h1 {
+    font-size: 24px;
+  }
+
+  .trash-title h1 svg {
+    width: 23px;
+    height: 23px;
+  }
+
+  .trash-title p {
+    max-width: 100%;
+
+    font-size: 13px;
+    line-height: 1.5;
   }
 
   .trash-empty-button {
     width: 100%;
-    justify-content: center;
-  }
-}
 
-@media (max-width: 600px) {
-  .trash-page {
-    padding: 20px 12px 40px;
+    min-height: 44px;
   }
 
-  .trash-header-left {
-    flex-direction: column;
-    gap: 12px;
-  }
+  /* MESSAGE */
 
-  .trash-header h1 {
-    font-size: 24px;
-  }
+  .trash-message {
+    margin-bottom: 15px;
+    padding: 11px 12px;
 
-  .trash-header p {
     font-size: 13px;
   }
 
+  /* INFO */
+
   .trash-info {
-    width: 100%;
-    box-sizing: border-box;
+    margin-bottom: 15px;
+    padding: 13px;
   }
 
+  .trash-info-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* CACHER TABLEAU */
+
   .trash-table-wrapper {
+    display: none;
+  }
+
+  /* AFFICHER CARTES */
+
+  .trash-mobile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    width: 100%;
+  }
+
+  /* CARTE */
+
+  .trash-mobile-card {
+    position: relative;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 14px;
+
+    border: 1px solid #e1e5ea;
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.035);
+  }
+
+  /* TOP CARTE */
+
+  .trash-mobile-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    min-width: 0;
+  }
+
+  .trash-mobile-file {
+    display: flex;
+    align-items: center;
+
+    min-width: 0;
+    flex: 1;
+
+    gap: 11px;
+  }
+
+  .trash-mobile-file-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 auto;
+
+    width: 43px;
+    height: 43px;
+
     border-radius: 9px;
+
+    background: #f0f2f5;
+    color: #59636f;
+  }
+
+  .trash-mobile-file-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .trash-mobile-file-info {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+
+    gap: 3px;
+  }
+
+  .trash-mobile-file-info strong {
+    display: block;
+
+    max-width: 100%;
+
+    overflow: hidden;
+
+    color: #24292f;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .trash-mobile-file-info small {
+    display: block;
+
+    max-width: 100%;
+
+    overflow: hidden;
+
+    color: #8b949e;
+
+    font-size: 11px;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* MENU MOBILE */
+
+  .trash-mobile-menu-container {
+    position: relative;
+
+    flex: 0 0 auto;
+  }
+
+  .trash-mobile-menu-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 35px;
+    height: 35px;
+
+    border: 1px solid #e0e4e8;
+    border-radius: 8px;
+
+    background: #ffffff;
+    color: #59636f;
+
+    cursor: pointer;
+  }
+
+  .trash-mobile-menu-button:active {
+    background: #f2f4f6;
+  }
+
+  .trash-mobile-menu-button svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* MENU */
+
+  .trash-mobile-action-menu {
+    position: absolute;
+
+    top: 41px;
+    right: 0;
+
+    z-index: 200;
+
+    width: 205px;
+
+    padding: 6px;
+
+    border: 1px solid #dfe3e8;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.13);
+  }
+
+  .trash-mobile-action-menu button {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    width: 100%;
+
+    padding: 10px 11px;
+
+    border: 0;
+    border-radius: 7px;
+
+    background: transparent;
+    color: #3f464e;
+
+    font-size: 13px;
+    text-align: left;
+
+    cursor: pointer;
+  }
+
+  .trash-mobile-action-menu button:hover {
+    background: #f3f4f6;
+  }
+
+  .trash-mobile-action-menu button svg {
+    width: 16px;
+    height: 16px;
+
+    flex: 0 0 auto;
+  }
+
+  .trash-mobile-action-menu .delete-action {
+    color: #dc3545;
+  }
+
+  /* DÉTAILS */
+
+  .trash-mobile-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 8px;
+
+    margin-top: 15px;
+    padding-top: 13px;
+
+    border-top: 1px solid #edf0f2;
+  }
+
+  .trash-mobile-detail {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+
+    gap: 4px;
+  }
+
+  .trash-mobile-detail span {
+    color: #9199a3;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    text-transform: uppercase;
+  }
+
+  .trash-mobile-detail strong {
+    overflow: hidden;
+
+    color: #4b5563;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* ACTIONS RAPIDES */
+
+  .trash-mobile-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 8px;
+
+    margin-top: 13px;
+  }
+
+  .trash-mobile-actions button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    min-height: 40px;
+
+    padding: 8px 10px;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+  }
+
+  .trash-mobile-actions button svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .trash-mobile-restore {
+    border: 1px solid #d8e5dc;
+
+    background: #f4faf6;
+    color: #317348;
+  }
+
+  .trash-mobile-download {
+    border: 1px solid #dfe3e8;
+
+    background: #ffffff;
+    color: #4d5661;
+  }
+
+  /* EMPTY */
+
+  .trash-empty {
+    min-height: 300px;
+
+    padding: 25px 16px;
+  }
+
+  .trash-empty h2 {
+    font-size: 19px;
+  }
+
+  .trash-empty p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+}
+
+/* =========================================================
+   PETITS TÉLÉPHONES
+========================================================= */
+
+@media (max-width: 420px) {
+  .trash-page {
+    padding: 15px 10px 30px;
+  }
+
+  .trash-title h1 {
+    font-size: 22px;
+  }
+
+  .trash-title p {
+    font-size: 12px;
+  }
+
+  .trash-mobile-card {
+    padding: 12px;
+  }
+
+  .trash-mobile-file-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .trash-mobile-file-info strong {
+    font-size: 13px;
+  }
+
+  .trash-mobile-details {
+    gap: 6px;
+  }
+
+  .trash-mobile-detail strong {
+    font-size: 11px;
+  }
+
+  .trash-mobile-actions button {
+    font-size: 11px;
   }
 }

@@ -129,6 +129,31 @@ const getFileIcon = (file) => {
 };
 
 // ======================================================
+// NOM CATÉGORIE
+// ======================================================
+
+const getCategoryLabel = (file) => {
+  const category = getFileCategory(file);
+
+  switch (category) {
+    case "images":
+      return "Image";
+
+    case "videos":
+      return "Vidéo";
+
+    case "audio":
+      return "Audio";
+
+    case "documents":
+      return "Document";
+
+    default:
+      return "Autre";
+  }
+};
+
+// ======================================================
 // TRASH
 // ======================================================
 
@@ -138,7 +163,6 @@ export default function Trash() {
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
-
   const [openMenu, setOpenMenu] = useState(null);
 
   // ====================================================
@@ -146,7 +170,11 @@ export default function Trash() {
   // ====================================================
 
   const loadTrash = async () => {
-    if (!user) return;
+    if (!user) {
+      setFiles([]);
+      setLoading(false);
+      return;
+    }
 
     try {
       setLoading(true);
@@ -306,10 +334,7 @@ export default function Trash() {
     }
 
     try {
-      // -----------------------------------------------
-      // SUPPRIMER DU STORAGE
-      // -----------------------------------------------
-
+      // Supprimer du Storage
       if (file.storage_path) {
         const { error: storageError } = await supabase.storage
           .from("files")
@@ -320,10 +345,7 @@ export default function Trash() {
         }
       }
 
-      // -----------------------------------------------
-      // SUPPRIMER DE LA BASE
-      // -----------------------------------------------
-
+      // Supprimer de la base
       const { error: deleteError } = await supabase
         .from("files")
         .delete()
@@ -364,10 +386,7 @@ export default function Trash() {
     try {
       setLoading(true);
 
-      // -----------------------------------------------
-      // SUPPRIMER LES FICHIERS STORAGE
-      // -----------------------------------------------
-
+      // Supprimer du Storage
       const storagePaths = files
         .map((file) => file.storage_path)
         .filter(Boolean);
@@ -385,10 +404,7 @@ export default function Trash() {
         }
       }
 
-      // -----------------------------------------------
-      // SUPPRIMER LES ENREGISTREMENTS
-      // -----------------------------------------------
-
+      // Supprimer de la base
       const { error } = await supabase
         .from("files")
         .delete()
@@ -412,6 +428,30 @@ export default function Trash() {
   };
 
   // ====================================================
+  // UTILISATEUR NON CONNECTÉ
+  // ====================================================
+
+  if (!user) {
+    return (
+      <div className="trash-page">
+        <div className="trash-empty">
+          <div className="trash-empty-icon">
+            <FiTrash2 />
+          </div>
+
+          <h2>Connexion nécessaire</h2>
+
+          <p>Connectez-vous pour accéder à votre corbeille.</p>
+
+          <Link to="/login" className="trash-files-link">
+            Se connecter
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  // ====================================================
   // RENDU
   // ====================================================
 
@@ -430,13 +470,14 @@ export default function Trash() {
               onClick={(event) => event.stopPropagation()}
             >
               <FiArrowLeft />
-              Dashboard
+
+              <span>Dashboard</span>
             </Link>
 
-            <div>
+            <div className="trash-title">
               <h1>
                 <FiTrash2 />
-                Corbeille
+                <span>Corbeille</span>
               </h1>
 
               <p>Les fichiers supprimés sont conservés ici.</p>
@@ -453,7 +494,8 @@ export default function Trash() {
               }}
             >
               <FiTrash2 />
-              Vider la corbeille
+
+              <span>Vider la corbeille</span>
             </button>
           )}
         </div>
@@ -463,10 +505,17 @@ export default function Trash() {
         ============================================ */}
 
         {message && (
-          <div className="trash-message">
+          <div
+            className="trash-message"
+            onClick={(event) => event.stopPropagation()}
+          >
             <span>{message}</span>
 
-            <button type="button" onClick={() => setMessage("")}>
+            <button
+              type="button"
+              onClick={() => setMessage("")}
+              aria-label="Fermer"
+            >
               <FiX />
             </button>
           </div>
@@ -481,7 +530,7 @@ export default function Trash() {
             <FiTrash2 />
           </div>
 
-          <div>
+          <div className="trash-info-content">
             <strong>
               {files.length} fichier
               {files.length > 1 ? "s" : ""}
@@ -513,162 +562,287 @@ export default function Trash() {
 
             <Link to="/dashboard/files" className="trash-files-link">
               <FiFile />
-              Voir mes fichiers
+              <span>Voir mes fichiers</span>
             </Link>
           </div>
         ) : (
-          <div className="trash-table-wrapper">
-            <table className="trash-table">
-              <thead>
-                <tr>
-                  <th>Fichier</th>
-                  <th>Type</th>
-                  <th>Taille</th>
-                  <th>Date</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
+          <>
+            {/* ========================================
+                DESKTOP TABLE
+            ======================================== */}
 
-              <tbody>
-                {files.map((file) => {
-                  const category = getFileCategory(file);
+            <div className="trash-table-wrapper">
+              <table className="trash-table">
+                <thead>
+                  <tr>
+                    <th>Fichier</th>
+                    <th>Type</th>
+                    <th>Taille</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
 
-                  return (
-                    <tr key={file.id}>
-                      {/* FICHIER */}
+                <tbody>
+                  {files.map((file) => {
+                    const category = getFileCategory(file);
 
-                      <td>
-                        <div className="trash-file">
-                          <div className={`trash-file-icon ${category}`}>
-                            {getFileIcon(file)}
+                    return (
+                      <tr key={file.id}>
+                        <td>
+                          <div className="trash-file">
+                            <div className={`trash-file-icon ${category}`}>
+                              {getFileIcon(file)}
+                            </div>
+
+                            <div className="trash-file-info">
+                              <span title={file.name}>
+                                {file.name ||
+                                  file.original_name ||
+                                  "Fichier sans nom"}
+                              </span>
+
+                              {file.original_name &&
+                                file.original_name !== file.name && (
+                                  <small>{file.original_name}</small>
+                                )}
+                            </div>
                           </div>
+                        </td>
 
-                          <div className="trash-file-info">
-                            <span title={file.name}>
-                              {file.name ||
-                                file.original_name ||
-                                "Fichier sans nom"}
-                            </span>
+                        <td>
+                          <span className="trash-type">
+                            {getCategoryLabel(file)}
+                          </span>
+                        </td>
 
-                            {file.original_name &&
-                              file.original_name !== file.name && (
-                                <small>{file.original_name}</small>
-                              )}
-                          </div>
-                        </div>
-                      </td>
+                        <td>
+                          <span className="trash-size">
+                            {formatSize(file.size)}
+                          </span>
+                        </td>
 
-                      {/* TYPE */}
+                        <td>
+                          <span className="trash-date">
+                            {formatDate(file.created_at)}
+                          </span>
+                        </td>
 
-                      <td>
-                        <span className="trash-type">
-                          {category === "images"
-                            ? "Image"
-                            : category === "videos"
-                              ? "Vidéo"
-                              : category === "audio"
-                                ? "Audio"
-                                : category === "documents"
-                                  ? "Document"
-                                  : "Autre"}
-                        </span>
-                      </td>
-
-                      {/* TAILLE */}
-
-                      <td>
-                        <span className="trash-size">
-                          {formatSize(file.size)}
-                        </span>
-                      </td>
-
-                      {/* DATE */}
-
-                      <td>
-                        <span className="trash-date">
-                          {formatDate(file.created_at)}
-                        </span>
-                      </td>
-
-                      {/* ACTIONS */}
-
-                      <td>
-                        <div className="trash-actions">
-                          <button
-                            type="button"
-                            className="trash-restore-button"
-                            onClick={(event) => {
-                              event.stopPropagation();
-                              handleRestore(file);
-                            }}
-                            title="Restaurer"
-                          >
-                            <FiRefreshCw />
-                          </button>
-
-                          <div className="trash-menu-container">
+                        <td>
+                          <div className="trash-actions">
                             <button
                               type="button"
-                              className="trash-menu-button"
+                              className="trash-restore-button"
                               onClick={(event) => {
                                 event.stopPropagation();
-
-                                setOpenMenu(
-                                  openMenu === file.id ? null : file.id,
-                                );
+                                handleRestore(file);
                               }}
+                              title="Restaurer"
                             >
-                              <FiMoreVertical />
+                              <FiRefreshCw />
                             </button>
 
-                            {openMenu === file.id && (
-                              <div
-                                className="trash-action-menu"
-                                onClick={(event) => event.stopPropagation()}
+                            <div className="trash-menu-container">
+                              <button
+                                type="button"
+                                className="trash-menu-button"
+                                onClick={(event) => {
+                                  event.stopPropagation();
+
+                                  setOpenMenu(
+                                    openMenu === file.id ? null : file.id,
+                                  );
+                                }}
                               >
-                                <button
-                                  type="button"
-                                  onClick={() => handleRestore(file)}
-                                >
-                                  <FiRefreshCw />
-                                  Restaurer
-                                </button>
+                                <FiMoreVertical />
+                              </button>
 
-                                <button
-                                  type="button"
-                                  onClick={() => handleDownload(file)}
+                              {openMenu === file.id && (
+                                <div
+                                  className="trash-action-menu"
+                                  onClick={(event) => event.stopPropagation()}
                                 >
-                                  <FiDownload />
-                                  Télécharger
-                                </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => handleRestore(file)}
+                                  >
+                                    <FiRefreshCw />
+                                    Restaurer
+                                  </button>
 
-                                <button
-                                  type="button"
-                                  onClick={() => handleShare(file)}
-                                >
-                                  <FiShare2 />
-                                  Partager
-                                </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => handleDownload(file)}
+                                  >
+                                    <FiDownload />
+                                    Télécharger
+                                  </button>
 
-                                <button
-                                  type="button"
-                                  className="delete-action"
-                                  onClick={() => handlePermanentDelete(file)}
-                                >
-                                  <FiTrash2 />
-                                  Supprimer définitivement
-                                </button>
-                              </div>
-                            )}
+                                  <button
+                                    type="button"
+                                    onClick={() => handleShare(file)}
+                                  >
+                                    <FiShare2 />
+                                    Partager
+                                  </button>
+
+                                  <button
+                                    type="button"
+                                    className="delete-action"
+                                    onClick={() => handlePermanentDelete(file)}
+                                  >
+                                    <FiTrash2 />
+                                    Supprimer définitivement
+                                  </button>
+                                </div>
+                              )}
+                            </div>
                           </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+
+            {/* ========================================
+                MOBILE CARDS
+            ======================================== */}
+
+            <div className="trash-mobile-list">
+              {files.map((file) => {
+                const category = getFileCategory(file);
+
+                return (
+                  <article
+                    className="trash-mobile-card"
+                    key={file.id}
+                    onClick={(event) => event.stopPropagation()}
+                  >
+                    {/* TOP */}
+
+                    <div className="trash-mobile-card-top">
+                      <div className="trash-mobile-file">
+                        <div className={`trash-mobile-file-icon ${category}`}>
+                          {getFileIcon(file)}
                         </div>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+
+                        <div className="trash-mobile-file-info">
+                          <strong title={file.name}>
+                            {file.name ||
+                              file.original_name ||
+                              "Fichier sans nom"}
+                          </strong>
+
+                          {file.original_name &&
+                            file.original_name !== file.name && (
+                              <small>{file.original_name}</small>
+                            )}
+                        </div>
+                      </div>
+
+                      <div className="trash-mobile-menu-container">
+                        <button
+                          type="button"
+                          className="trash-mobile-menu-button"
+                          onClick={(event) => {
+                            event.stopPropagation();
+
+                            setOpenMenu(openMenu === file.id ? null : file.id);
+                          }}
+                          aria-label="Ouvrir les actions"
+                        >
+                          <FiMoreVertical />
+                        </button>
+
+                        {openMenu === file.id && (
+                          <div
+                            className="trash-mobile-action-menu"
+                            onClick={(event) => event.stopPropagation()}
+                          >
+                            <button
+                              type="button"
+                              onClick={() => handleRestore(file)}
+                            >
+                              <FiRefreshCw />
+                              Restaurer
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() => handleDownload(file)}
+                            >
+                              <FiDownload />
+                              Télécharger
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() => handleShare(file)}
+                            >
+                              <FiShare2 />
+                              Partager
+                            </button>
+
+                            <button
+                              type="button"
+                              className="delete-action"
+                              onClick={() => handlePermanentDelete(file)}
+                            >
+                              <FiTrash2 />
+                              Supprimer définitivement
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* INFOS */}
+
+                    <div className="trash-mobile-details">
+                      <div className="trash-mobile-detail">
+                        <span>Type</span>
+                        <strong>{getCategoryLabel(file)}</strong>
+                      </div>
+
+                      <div className="trash-mobile-detail">
+                        <span>Taille</span>
+                        <strong>{formatSize(file.size)}</strong>
+                      </div>
+
+                      <div className="trash-mobile-detail">
+                        <span>Date</span>
+                        <strong>{formatDate(file.created_at)}</strong>
+                      </div>
+                    </div>
+
+                    {/* ACTIONS RAPIDES */}
+
+                    <div className="trash-mobile-actions">
+                      <button
+                        type="button"
+                        className="trash-mobile-restore"
+                        onClick={() => handleRestore(file)}
+                      >
+                        <FiRefreshCw />
+                        <span>Restaurer</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        className="trash-mobile-download"
+                        onClick={() => handleDownload(file)}
+                      >
+                        <FiDownload />
+                        <span>Télécharger</span>
+                      </button>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </>
         )}
       </div>
     </div>

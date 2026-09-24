@@ -1,7 +1,7 @@
 /* =========================================================
-   FolderDetails.css
-   Interface de gestion de fichiers / dossiers
-   ========================================================= */
+   FOLDER DETAILS
+   Desktop + tablette + mobile
+========================================================= */
 
 .folder-page {
   min-height: 100vh;
@@ -18,7 +18,7 @@
 
 /* =========================================================
    BREADCRUMB
-   ========================================================= */
+========================================================= */
 
 .folder-breadcrumb {
   display: flex;
@@ -47,7 +47,7 @@
 
 /* =========================================================
    HEADER
-   ========================================================= */
+========================================================= */
 
 .folder-title-row {
   display: flex;
@@ -61,6 +61,10 @@
   display: flex;
   align-items: center;
   gap: 15px;
+  min-width: 0;
+}
+
+.folder-title-info {
   min-width: 0;
 }
 
@@ -114,6 +118,10 @@
   color: #718096;
   font-size: 14px;
 }
+
+/* =========================================================
+   HEADER BUTTONS
+========================================================= */
 
 .folder-header-actions {
   display: flex;
@@ -192,7 +200,7 @@
 
 /* =========================================================
    MESSAGE
-   ========================================================= */
+========================================================= */
 
 .folder-message {
   min-height: 44px;
@@ -209,9 +217,15 @@
   font-size: 14px;
 }
 
+.folder-message span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 .folder-message button {
   width: 30px;
   height: 30px;
+  flex: 0 0 30px;
   border: 0;
   border-radius: 7px;
   background: transparent;
@@ -228,7 +242,7 @@
 
 /* =========================================================
    TOOLBAR / RECHERCHE
-   ========================================================= */
+========================================================= */
 
 .folder-toolbar {
   display: flex;
@@ -280,7 +294,7 @@
 
 /* =========================================================
    SOUS-DOSSIERS
-   ========================================================= */
+========================================================= */
 
 .folder-subfolders-section {
   margin-bottom: 28px;
@@ -397,8 +411,8 @@
 }
 
 /* =========================================================
-   TABLE FICHIERS
-   ========================================================= */
+   TABLEAU
+========================================================= */
 
 .folder-files-section {
   min-width: 0;
@@ -411,22 +425,42 @@
   border-radius: 13px;
   background: #fff;
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.025);
+  -webkit-overflow-scrolling: touch;
 }
 
 .folder-files-table {
-  min-width: 780px;
+  width: 100%;
 }
+
+/* =========================================================
+   HEADER TABLEAU
+========================================================= */
 
 .folder-files-table-header,
 .folder-file-row {
   display: grid;
-  grid-template-columns: minmax(260px, 1.8fr) minmax(
-      130px,
-      0.8fr
-    ) 120px 130px 180px;
+
+  /*
+    NOM | TYPE | TAILLE | DATE | ACTIONS
+  */
+
+  grid-template-columns:
+    minmax(250px, 1.8fr)
+    minmax(120px, 0.8fr)
+    minmax(90px, 0.7fr)
+    minmax(120px, 0.85fr)
+    minmax(150px, 0.9fr);
+
   align-items: center;
-  column-gap: 16px;
+  column-gap: 14px;
   padding: 0 18px;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.folder-files-table-header > div:not(:last-child),
+.folder-file-row > div:not(:last-child) {
+  justify-self: start;
 }
 
 .folder-files-table-header {
@@ -454,6 +488,10 @@
   background: #fafcff;
 }
 
+/* =========================================================
+   NOM FICHIER
+========================================================= */
+
 .folder-file-name {
   min-width: 0;
   display: flex;
@@ -465,12 +503,25 @@
   width: 40px;
   height: 40px;
   flex: 0 0 40px;
+  padding: 0;
+  border: 0;
   border-radius: 9px;
   background: #f1f5f9;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 20px;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.folder-file-icon:hover {
+  background: #e8f1ff;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.12);
 }
 
 .folder-file-name-text {
@@ -480,14 +531,27 @@
   gap: 6px;
 }
 
-.folder-file-name-text span {
+.folder-file-name-text button {
   min-width: 0;
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: #1f2937;
   font-size: 14px;
   font-weight: 600;
+  text-align: left;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.folder-file-name-text button:hover {
+  color: #2563eb;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .folder-favorite-active {
@@ -496,9 +560,15 @@
   fill: #f59e0b;
 }
 
+/* =========================================================
+   TYPE / TAILLE / DATE
+========================================================= */
+
 .folder-file-type,
 .folder-file-size,
 .folder-file-date {
+  min-width: 0;
+  display: block;
   color: #64748b;
   font-size: 13px;
   overflow: hidden;
@@ -506,16 +576,26 @@
   white-space: nowrap;
 }
 
+/* =========================================================
+   ACTIONS
+========================================================= */
+
 .folder-file-actions {
+  min-width: 0;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   gap: 5px;
 }
 
+/* =========================================================
+   BOUTONS ACTIONS
+========================================================= */
+
 .folder-action-button {
   width: 35px;
   height: 35px;
+  flex: 0 0 35px;
   border: 1px solid transparent;
   border-radius: 8px;
   background: transparent;
@@ -531,6 +611,7 @@
   border-color: #e2e8f0;
   background: #f8fafc;
   color: #2563eb;
+  transform: translateY(-1px);
 }
 
 .folder-action-button.is-favorite {
@@ -544,8 +625,8 @@
 }
 
 /* =========================================================
-   MENUS CONTEXTUELS
-   ========================================================= */
+   MENUS
+========================================================= */
 
 .folder-menu-container {
   position: relative;
@@ -612,6 +693,7 @@
     opacity: 0;
     transform: translateY(-4px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -620,7 +702,7 @@
 
 /* =========================================================
    EMPTY STATE
-   ========================================================= */
+========================================================= */
 
 .folder-empty {
   min-height: 270px;
@@ -672,7 +754,7 @@
 
 /* =========================================================
    MODALES
-   ========================================================= */
+========================================================= */
 
 .folder-modal-overlay {
   position: fixed;
@@ -845,6 +927,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -855,6 +938,7 @@
     opacity: 0;
     transform: translateY(8px) scale(0.985);
   }
+
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -863,7 +947,7 @@
 
 /* =========================================================
    APERÇU
-   ========================================================= */
+========================================================= */
 
 .folder-preview-overlay {
   padding: 18px;
@@ -946,19 +1030,41 @@
 
 /* =========================================================
    LOADING
-   ========================================================= */
+========================================================= */
 
-.folder-page .folder-content > p {
+.folder-loading {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
   color: #64748b;
 }
 
-.folder-page:has(.folder-content > p:first-child) {
-  /* no-op: keeps loading page visually consistent */
+.folder-loading p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.folder-loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #dbeafe;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: folderSpinner 0.8s linear infinite;
+}
+
+@keyframes folderSpinner {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* =========================================================
    SCROLLBAR
-   ========================================================= */
+========================================================= */
 
 .folder-table-wrapper::-webkit-scrollbar,
 .folder-preview-body::-webkit-scrollbar {
@@ -983,8 +1089,8 @@
 }
 
 /* =========================================================
-   RESPONSIVE
-   ========================================================= */
+   TABLET
+========================================================= */
 
 @media (max-width: 1100px) {
   .folder-title-row {
@@ -998,28 +1104,53 @@
   }
 }
 
+/* =========================================================
+   MOBILE
+========================================================= */
+
 @media (max-width: 700px) {
   .folder-page {
-    padding: 20px 13px 45px;
+    padding: 20px 12px 45px;
   }
 
   .folder-breadcrumb {
     margin-bottom: 16px;
+    font-size: 12px;
+    gap: 6px;
+  }
+
+  .folder-title-row {
+    gap: 18px;
+    margin-bottom: 22px;
   }
 
   .folder-title-area {
     width: 100%;
+    gap: 10px;
   }
 
   .folder-large-icon {
     width: 48px;
     height: 48px;
     flex-basis: 48px;
+    font-size: 23px;
+  }
+
+  .folder-title-area h1,
+  .folder-title {
+    font-size: 22px;
+  }
+
+  .folder-title-area p {
+    font-size: 12px;
+    margin-top: 5px;
   }
 
   .folder-header-actions {
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 8px;
   }
 
   .folder-create-button,
@@ -1027,15 +1158,24 @@
   .folder-delete-button,
   .folder-upload-button {
     width: 100%;
+    min-height: 44px;
+    padding: 0 10px;
+    font-size: 12px;
   }
 
   .folder-upload-button {
     grid-column: 1 / -1;
   }
 
+  /* =====================================================
+     TOOLBAR
+  ===================================================== */
+
   .folder-toolbar {
     align-items: stretch;
     flex-direction: column;
+    gap: 9px;
+    margin-bottom: 20px;
   }
 
   .folder-search {
@@ -1043,15 +1183,198 @@
   }
 
   .folder-file-count {
-    align-self: flex-end;
+    align-self: flex-start;
+    font-size: 12px;
   }
+
+  /* =====================================================
+     SOUS-DOSSIERS
+  ===================================================== */
 
   .folder-subfolders-grid {
     grid-template-columns: 1fr;
+    gap: 9px;
   }
+
+  .folder-subfolder-card {
+    min-height: 72px;
+    padding: 11px 48px 11px 11px;
+  }
+
+  .folder-subfolder-icon {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+  }
+
+  /* =====================================================
+     TABLEAU MOBILE
+
+     IMPORTANT :
+     Pas de min-width 650px.
+     Les 5 colonnes restent visibles dans l'écran.
+  ===================================================== */
+
+  .folder-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .folder-files-table {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .folder-files-table-header,
+  .folder-file-row {
+    width: 100%;
+    min-width: 0;
+
+    display: grid !important;
+    grid-template-columns:
+      minmax(120px, 1.8fr)
+      minmax(52px, 0.7fr)
+      minmax(55px, 0.75fr)
+      minmax(72px, 0.9fr)
+      minmax(82px, 0.9fr) !important;
+    column-gap: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  /* EN-TÊTE */
+
+  .folder-files-table-header {
+    min-height: 44px;
+    font-size: 8px;
+    letter-spacing: 0.02em;
+    display: grid !important;
+  }
+
+  /* LIGNES */
+
+  .folder-file-row {
+    min-height: 64px;
+  }
+
+  .folder-file-row > .folder-file-name,
+  .folder-file-row > .folder-file-actions {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  /* NOM */
+
+  .folder-file-name {
+    min-width: 0;
+    gap: 6px;
+  }
+
+  .folder-file-icon {
+    width: 31px;
+    height: 31px;
+    flex: 0 0 31px;
+    border-radius: 7px;
+    font-size: 15px;
+  }
+
+  .folder-file-name-text {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .folder-file-name-text button {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    font-size: 10px;
+  }
+
+  /* TYPE */
+
+  .folder-file-type {
+    min-width: 0;
+    display: block !important;
+    color: #475569;
+    font-size: 9px;
+  }
+
+  /* TAILLE */
+
+  .folder-file-size {
+    min-width: 0;
+    display: block !important;
+    color: #475569;
+    font-size: 9px;
+  }
+
+  /* DATE */
+
+  .folder-file-date {
+    min-width: 0;
+    display: block !important;
+    color: #475569;
+    font-size: 9px;
+  }
+
+  /* ACTIONS */
+
+  .folder-file-actions {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2px;
+  }
+
+  .folder-action-button {
+    width: 27px;
+    height: 27px;
+    flex: 0 0 27px;
+    border-radius: 6px;
+  }
+
+  .folder-action-button svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  /* MENU */
+
+  .folder-action-menu {
+    position: absolute;
+    top: calc(100% + 5px);
+    right: 0;
+    min-width: 180px;
+    max-width: calc(100vw - 25px);
+    z-index: 100;
+  }
+
+  /* MODALES */
 
   .folder-modal-overlay {
     padding: 12px;
+  }
+
+  .folder-modal {
+    width: 100%;
+    max-height: calc(100vh - 24px);
+    border-radius: 13px;
+  }
+
+  .folder-modal-header {
+    min-height: 60px;
+    padding: 12px 14px;
+  }
+
+  .folder-modal-body {
+    padding: 16px;
+  }
+
+  .folder-modal-footer {
+    padding: 12px 14px;
   }
 
   .folder-preview-modal {
@@ -1068,7 +1391,16 @@
   }
 }
 
+/* =========================================================
+   PETIT MOBILE
+========================================================= */
+
 @media (max-width: 480px) {
+  .folder-page {
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+
   .folder-header-actions {
     grid-template-columns: 1fr;
   }
@@ -1077,9 +1409,8 @@
     grid-column: auto;
   }
 
-  .folder-title-area h1,
-  .folder-title {
-    font-size: 22px;
+  .folder-title-area {
+    gap: 8px;
   }
 
   .folder-back-button {
@@ -1089,10 +1420,84 @@
   }
 
   .folder-large-icon {
-    width: 44px;
-    height: 44px;
-    flex-basis: 44px;
-    font-size: 22px;
+    width: 43px;
+    height: 43px;
+    flex-basis: 43px;
+    font-size: 21px;
+  }
+
+  .folder-title-area h1,
+  .folder-title {
+    font-size: 20px;
+  }
+
+  .folder-title-area p {
+    font-size: 11px;
+  }
+
+  /* =====================================================
+     TABLEAU 480px
+  ===================================================== */
+
+  .folder-files-table-header,
+  .folder-file-row {
+    grid-template-columns:
+      minmax(105px, 1.7fr)
+      minmax(45px, 0.7fr)
+      minmax(45px, 0.65fr)
+      minmax(65px, 0.85fr)
+      minmax(75px, 0.85fr);
+
+    column-gap: 3px;
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+
+  .folder-files-table-header {
+    min-height: 42px;
+    font-size: 7px;
+  }
+
+  .folder-file-row {
+    min-height: 61px;
+  }
+
+  .folder-file-icon {
+    width: 28px;
+    height: 28px;
+    flex-basis: 28px;
+    font-size: 14px;
+  }
+
+  .folder-file-name {
+    gap: 4px;
+  }
+
+  .folder-file-name-text button {
+    font-size: 9px;
+  }
+
+  .folder-file-type {
+    font-size: 8px;
+  }
+
+  .folder-file-size {
+    font-size: 8px;
+  }
+
+  .folder-file-date {
+    font-size: 8px;
+  }
+
+  .folder-action-button {
+    width: 24px;
+    height: 24px;
+    flex-basis: 24px;
+  }
+
+  .folder-action-button svg {
+    width: 12px;
+    height: 12px;
   }
 
   .folder-modal-footer {
@@ -1102,5 +1507,70 @@
   .folder-modal-cancel,
   .folder-modal-confirm {
     width: 100%;
+  }
+
+  .folder-preview-pdf {
+    min-height: 350px;
+  }
+}
+
+/* =========================================================
+   TRÈS PETITS ÉCRANS
+========================================================= */
+
+@media (max-width: 360px) {
+  .folder-page {
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+
+  .folder-files-table-header,
+  .folder-file-row {
+    grid-template-columns:
+      minmax(95px, 1.6fr)
+      minmax(40px, 0.65fr)
+      minmax(42px, 0.65fr)
+      minmax(60px, 0.8fr)
+      minmax(68px, 0.8fr);
+
+    column-gap: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .folder-files-table-header {
+    font-size: 6.5px;
+  }
+
+  .folder-file-name {
+    gap: 3px;
+  }
+
+  .folder-file-icon {
+    width: 25px;
+    height: 25px;
+    flex-basis: 25px;
+    font-size: 12px;
+  }
+
+  .folder-file-name-text button {
+    font-size: 8px;
+  }
+
+  .folder-file-type,
+  .folder-file-size,
+  .folder-file-date {
+    font-size: 7.5px;
+  }
+
+  .folder-action-button {
+    width: 22px;
+    height: 22px;
+    flex-basis: 22px;
+  }
+
+  .folder-action-button svg {
+    width: 11px;
+    height: 11px;
   }
 }
