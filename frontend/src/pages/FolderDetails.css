@@ -1108,7 +1108,7 @@
    MOBILE
 ========================================================= */
 
-@media (max-width: 700px) {
+/* @media (max-width: 700px) { 
   .folder-page {
     padding: 20px 12px 45px;
   }
@@ -1166,7 +1166,9 @@
   .folder-upload-button {
     grid-column: 1 / -1;
   }
+    */
 
+@media (max-width: 700px) {
   /* =====================================================
      TOOLBAR
   ===================================================== */
@@ -1392,6 +1394,51 @@
 }
 
 /* =========================================================
+   TABLEAU ENTRE 701px ET 767px
+========================================================= */
+
+@media (min-width: 701px) and (max-width: 767px) {
+  .folder-files-table-header,
+  .folder-file-row {
+    display: grid !important;
+    grid-template-columns:
+      minmax(0, 1.8fr)
+      minmax(0, 0.8fr)
+      minmax(0, 0.7fr)
+      minmax(0, 0.85fr)
+      minmax(0, 0.9fr) !important;
+    align-items: center;
+    column-gap: 8px;
+    padding: 0 12px;
+  }
+
+  .folder-files-table-header {
+    display: grid !important;
+    min-height: 48px;
+  }
+
+  .folder-file-row {
+    min-height: 70px;
+  }
+
+  .folder-file-type,
+  .folder-file-size,
+  .folder-file-date {
+    display: block !important;
+  }
+
+  .folder-file-row > .folder-file-name,
+  .folder-file-row > .folder-file-type,
+  .folder-file-row > .folder-file-size,
+  .folder-file-row > .folder-file-date,
+  .folder-file-row > .folder-file-actions {
+    grid-column: auto;
+    grid-row: auto;
+    min-width: 0;
+  }
+}
+
+/* =========================================================
    PETIT MOBILE
 ========================================================= */
 
@@ -1552,7 +1599,16 @@
   }
 
   .folder-file-name {
-    gap: 3px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .folder-file-name-text {
+    width: 100%;
+    justify-content: center;
+    gap: 2px;
   }
 
   .folder-file-icon {
@@ -1563,7 +1619,9 @@
   }
 
   .folder-file-name-text button {
+    display: block;
     font-size: 8px;
+    text-align: center;
   }
 
   .folder-file-type,
