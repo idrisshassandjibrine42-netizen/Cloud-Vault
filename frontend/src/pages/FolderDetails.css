@@ -1518,24 +1518,33 @@
    TRÈS PETITS ÉCRANS
 ========================================================= */
 
-@media (max-width: 360px) {
+@media (max-width: 480px) {
   .folder-page {
     padding-left: 7px;
     padding-right: 7px;
   }
 
+  .folder-table-wrapper {
+    overflow-x: hidden;
+  }
+
   .folder-files-table-header,
   .folder-file-row {
     grid-template-columns:
-      minmax(95px, 1.6fr)
-      minmax(40px, 0.65fr)
-      minmax(42px, 0.65fr)
-      minmax(60px, 0.8fr)
-      minmax(68px, 0.8fr);
+      minmax(0, 1.6fr)
+      minmax(0, 0.65fr)
+      minmax(0, 0.65fr)
+      minmax(0, 0.8fr)
+      minmax(0, 0.8fr) !important;
 
     column-gap: 2px;
     padding-left: 5px;
     padding-right: 5px;
+  }
+
+  .folder-files-table-header > div,
+  .folder-file-row > div {
+    min-width: 0;
   }
 
   .folder-files-table-header {
